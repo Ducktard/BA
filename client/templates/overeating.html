@@ -1,0 +1,74 @@
+  <ion-view cache-view="false" title="Neue Essattacke" hide-back-button=true>
+    <ion-nav-title>Essattacke erstellen</ion-nav-title>
+
+    <ion-nav-buttons side="left">
+        <button ng-click="overeating.goToCreateOvereating()" class="button button-clear button-positive"><i class = "icon ion-chevron-left"></i></button>
+    </ion-nav-buttons>
+
+
+    <ion-content>
+
+      <form ng-submit="overeating.createOvereating(over)">
+
+      <!--Stresslevel-->
+      <div class="space"></div>
+      <span  class="ueberschrift-h1">Wie gestresst bist du gerade?</span>
+      <div class = "range">  <!--item -->
+              <i class = "icon ion-minus-round range-min-max-el"></i>
+              <input type = "range" name = "volume"  ng-model="over.stress" ng-change="sliderToNumber()" min="1" max="10" step="1">
+              <i class = "icon ion-plus-round range-min-max-el"></i>
+      </div>
+      <!--Stresslevel-->
+
+      <!--Hungerlevel-->
+      <span class="ueberschrift-h1-grey"> Wie hungrig warst du vorher?</span>
+      <ion-list>
+          <ion-radio name="hunger" ng-model="over.hunger" ng-value="'wenig'">wenig</ion-radio>
+          <ion-radio name="hunger" ng-model="over.hunger" ng-value="'mittel'">mittel</ion-radio>
+          <ion-radio name="hunger" ng-model="over.hunger" ng-value="'sehr'">sehr</ion-radio>
+      </ion-list>
+      <!--Hungerlevel-->
+
+
+      <!--Lebensmittel-->
+        <span class="ueberschrift-h1-grey"> Welche Lebensmittel hast du zu dir genommen?</span>
+            <ion-list>
+                <span class="ueberschrift-h2" ng-show="!overeating.dataFood.length">Keine Lebensmittel angegeben.</span>
+                <ion-checkbox  ng-repeat="foo in overeating.dataFood" ng-click="overeating.getFoodsOneByOne(foo)">
+                  {{foo.name}}
+                  <img id="img-food" ng-src="food-icon-small.png">
+                </ion-checkbox>
+            </ion-list>
+      <!--Lebensmittel-->
+
+
+    <!--Locations-->
+      <span class="ueberschrift-h1-grey"> An welchem Ort hast du zu viel gegessen?</span>
+         <span class="ueberschrift-h2" ng-show="!overeating.dataLocations.length">Keine Orte angegeben.</span>
+          <ion-list>
+              <ion-radio name="location" ng-model="over.location" ng-value="'{{locca.name}}'" ng-repeat="locca in overeating.dataLocations">
+              <img ng-src="location-icon-small.png">
+                {{locca.name}}
+              </ion-radio>
+       </ion-list>
+    <!--Locations-->
+
+
+      <button class="button button-full btn btn-info icon ion-plus" type="submit">
+         Essattacke abschicken
+      </button>
+
+      </form>
+
+
+      <button class="button button-full btn btn-danger button button-full btn btn-info icon ion-close" ng-click="overeating.goToCreateOvereating()">
+        Abbrechen
+      </button>
+
+
+
+
+
+
+  </ion-content>
+</ion-view>

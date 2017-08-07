@@ -1,0 +1,33 @@
+<ion-view cache-view="false" title="Verlauf" hide-back-button=false>
+
+  <ion-nav-buttons side="left">
+      <button id="info-button" ng-click="checkin.infoHistory()" class="button button-clear button-positive"><i class="icon ion-information"></i></button>
+  </ion-nav-buttons>
+
+  <ion-content>
+      <ion-list>
+          <span class="ueberschrift-h1-grey" ng-show="!checkin.data.length">Bisher noch keine Checkins oder Essattacken.</span>
+
+          <ion-item
+          ng-repeat="e in checkin.data"
+          class="item-chat item-remove-animate item-avatar item-icon-right"
+          type="item-text-wrap">
+
+
+
+        <img ng-src="{{e.type == 'Checkin' && 'green-checkmark.png' || 'red-cross-2.png'}}"/>
+        <h2><span></span>{{e.type}}</h2>
+       <span class="last-message-timestamp">{{ e.date | calendar }}</span>
+       <i class="icon ion-chevron-right icon-accessory"></i>
+
+    <!--   <ion-option-button class="button-assertive" ng-click="test.deletesection(e)">
+         Delete
+       </ion-option-button>-->
+
+     </ion-item>
+   </ion-list>
+
+
+
+  </ion-content>
+</ion-view>

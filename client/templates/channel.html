@@ -1,0 +1,42 @@
+<ion-view cache-view="false" title="{{channel.data.name }}" hide-back-button=true>
+  <ion-nav-buttons side="left">
+      <button ng-click="channel.goToChannels(); channel.setChanId(-1)" class="button button-clear button-positive"><i class = "icon ion-chevron-left"></i></button>
+  </ion-nav-buttons>
+
+  <ion-nav-buttons side="right">
+      <button id="info-button" ng-click="channel.info()" class="button button-clear button-positive"><i class="icon ion-information"></i></button>
+  </ion-nav-buttons>
+
+
+  <ion-content class="chat" delegate-handle="chatScroll">
+    <div class="message-list">
+      <div ng-repeat="mes in channel.messages" class="message-wrapper">
+        <div class="message" ng-class="mes.userId === $root.currentUser._id ? 'message-mine' : 'message-other'">
+        <div class="message">
+            <div class="message-username">  {{mes.username}} </div>
+            <div class="text">{{ mes.message}}</div>
+            <span class="message-timestamp">{{ mes.date | date:"hh:mm" }}</span>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+  <ion-footer-bar keyboard-attach class="bar-stable footer-chat item-input-inset">
+
+    <label class="item-input-wrapper">
+      <input ng-model="object.message"
+             dir="auto"
+             type="text"
+             class="input-chat-field"
+             on-return="chat.sendMessage(); chat.closeKeyboard()"
+             on-focus="chat.inputUp()"
+             on-blur="chat.inputDown()"/>
+    </label>
+
+    <span>
+      <button ng-if="object.message || object.message.length ===0" ng-click="channel.saveMessage(object)" class="button button-clear button-positive">Senden</button>
+    </span>
+    <span>
+      <i class="buttons-seperator icon ion-android-more-vertical"></i>
+    </span>
+  </ion-footer-bar>
+</ion-view>

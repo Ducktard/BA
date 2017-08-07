@@ -1,0 +1,41 @@
+<ion-view cache-view="false" hide-back-button=true>
+  <ion-nav-title>Neues Gericht hinzufügen</ion-nav-title>
+
+  <ion-nav-buttons side="left">
+      <button ng-click="foods.goToSeeFoods()" class="button button-clear button-positive"><i class = "icon ion-chevron-left"></i></button>
+  </ion-nav-buttons>
+
+  <ion-content>
+    <form ng-submit="foods.saveFood(newfood)">
+
+    <!-- name -->
+    <span class="ueberschrift-h1 ueberschrift-h1-last">Wie heißt das Gericht?</span>
+    <div class="space"></div>
+    <div class="list">
+       <label class="item item-input">
+       <input type="text" ng-model="newfood.name" placeholder="Name des Gerichts">
+       </label>
+
+    </div>
+    <!-- name ende -->
+
+    <!-- calorien -->
+    <span class="ueberschrift-h1 ueberschrift-h1-last">Wie viele Kalorien hat es auf 100 gramm?</span>
+    <div class="space"></div>
+    <div class="list">
+       <label class="item item-input">
+       <input type="text" ng-model="newfood.calories" placeholder="Kalorienanzahl"><span> kcal/100g </span>
+       </label>
+
+    </div>
+    <!-- calorien ende-->
+
+    <button class="button button-full btn btn-info icon ion-plus" type="submit">
+      Gericht hinzufügen
+    </button>
+
+
+  </form>
+
+  </ion-content>
+</ion-view>

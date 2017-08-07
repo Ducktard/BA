@@ -1,0 +1,29 @@
+<ion-view cache-view="false" hide-back-button=true>
+  <ion-nav-title>Alle Channel</ion-nav-title>
+
+  <ion-nav-buttons side="left">
+      <button id="info-button" ng-click="channels.info()" class="button button-clear button-positive"><i class="icon ion-information"></i></button>
+  </ion-nav-buttons>
+
+  <ion-nav-buttons side="right">
+      <button ng-click="channels.goToCreateChannel()" class="button button-clear button-positive button-icon ion-ios-compose-outline"></button>
+  </ion-nav-buttons>
+
+        <ion-content>
+          <ion-list>
+            <span class="ueberschrift-h2" ng-show="!channels.data.length">Bisher gibt es noch keine Channel. Sei der Erste der einen anlegt. </span>
+
+            <ion-item ng-repeat="chan in channels.data"
+                      class="item-chat item-remove-animate item-avatar item-icon-right item-assertive-custom"
+                      type="item-text-wrap"
+                      href="#!/channel/{{ chan._id }}">
+                          <h2><i class="ion-pound"></i>{{ chan.name }}</h2>
+                          <i class="icon ion-chevron-right icon-accessory"></i>
+                      <ion-option-button class="button-assertive" ng-click="channels.removeChannel(chan)">
+                          Delete
+                      </ion-option-button>
+            </ion-item>
+          </ion-list>
+        </ion-content>
+
+</ion-view>

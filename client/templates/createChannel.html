@@ -1,0 +1,35 @@
+<ion-view cache-view="false" hide-back-button=true>
+  <ion-nav-title>Channel erstellen</ion-nav-title>
+
+  <ion-nav-buttons side="left">
+      <button ng-click="channels.goToChannels()" class="button button-clear button-positive"><i class = "icon ion-chevron-left"></i></button>
+  </ion-nav-buttons>
+
+
+  <ion-content>
+
+<form ng-submit="channels.createChannel(obj)">
+      <!-- Channel -->
+      <span class="ueberschrift-h1 ueberschrift-h1-last">Wie soll der Channel heißen?</span>
+      <div class="space"></div>
+      <div class="list">
+         <label class="item item-input">
+           <i class="ion-pound"></i>
+           <input type="text" ng-model="obj.name" placeholder="Channel name">
+         </label>
+
+         <label class="item item-input">
+          <i class="icon ion-information placeholder-icon"></i>
+          <input type="text" ng-model="obj.description"placeholder="Beschreibung">
+        </label>
+
+      </div>
+      <!-- Channel ende -->
+
+      <button class="button button-full btn btn-info" type="submit">
+         Channel erstellen
+      </button>
+</form>
+
+  </ion-content>
+</ion-view>

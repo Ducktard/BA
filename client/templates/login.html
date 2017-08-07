@@ -1,0 +1,27 @@
+<ion-view title="login" hide-back-button=true>
+  <ion-content class="padding body">
+
+    <img if="logo"ng-src="logo_ellipsa3.png" />
+
+<!--    <ion-item class="card padding">-->
+<!--      <div class="item-text-wrap padding">
+        Gib deinen Benutzernamen und Passwort ein.
+      </div>-->
+
+<form ng-submit="auth.doLoginAction(credentials)">
+      <label class="item item-input " id="input-credentials">
+        <input type="text" ng-model="credentials.username" placeholder="UserName" />
+      </label>
+      
+      <label class="item item-input input-credentials" id="input-credentials">
+        <input type="password" ng-model="credentials.password" placeholder="Password" />
+      </label>
+      <div class="padding">
+        <button class="button button-block btn btn-primary button-login" type="submit">Login</button>
+      </div>
+  <!--  </ion-item>-->
+</form>
+
+  <button class="button button-block btn btn-primary button-login"  ng-disabled="credentials.password.length === 0 || credentials.username.length === 0"   ng-click="auth.goToRegister()">Neuen Account erstellen</button>
+  </ion-content>
+</ion-view>

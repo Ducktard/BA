@@ -1,0 +1,32 @@
+.content-block {
+  margin-top: 150px;
+}
+
+
+.space{
+  display: block;
+  height: 20px;
+}
+
+.btn-circle {
+  width: 200px;
+  height: 200px;
+  line-height: 200px; /* adjust line height to align vertically*/
+  padding:0;
+border-style: none;
+  border-radius: 50%;
+  background-color: #B33A3A;
+}
+
+.btn-circle:hover{
+    background-color: #6a2828;
+}
+
+
+span#text-button{
+  color: #f2f2eb;
+}
+
+#info-button-overeating{
+  margin-left: 10px;
+}

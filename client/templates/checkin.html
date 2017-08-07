@@ -1,0 +1,74 @@
+<ion-view cache-view="false" hide-back-button=true>
+  <ion-nav-title>Checkin erstellen</ion-nav-title>
+
+  <ion-nav-buttons side="left">
+      <button ng-click="checkin.goToCreateCheckin()" class="button button-clear button-positive"><i class = "icon ion-chevron-left"></i></button>
+  </ion-nav-buttons>
+
+
+  <ion-content>
+    <form ng-submit="checkin.createCheckin(check)">
+
+          <!--Stresslevel-->
+          <div class="space"></div>
+          <span  class="ueberschrift-h1-grey">Wie gestresst bist du gerade?</span>
+          <div class = "range">  <!--item -->
+                  <i class = "icon ion-minus-round range-min-max-el"></i>
+                  <input type = "range" name = "volume"  ng-model="check.stress" ng-change="sliderToNumber()" min="1" max="10" step="1">
+                  <i class = "icon ion-plus-round range-min-max-el"></i>
+          </div>
+          <!--Stresslevel-->
+
+
+          <!--Hungerlevel-->
+          <span class="ueberschrift-h1-grey"> Wie hungrig fühlst du dich?</span>
+          <ion-list>
+              <ion-radio ng-model="check.hunger" ng-value="'wenig'">wenig</ion-radio>
+              <ion-radio ng-model="check.hunger" ng-value="'mittel'">mittel</ion-radio>
+              <ion-radio ng-model="check.hunger" ng-value="'sehr'">sehr</ion-radio>
+          </ion-list>
+          <!--Hungerlevel-->
+
+
+          <!--Hours slept-->
+          <span class="ueberschrift-h1-grey">Wie viele Stunden hast du geschlafen?</span>
+          <div class = "range">  <!--item -->
+                  <i class="range-min-max-el">1</i>
+                  <input type = "range" name = "volume2"  ng-model="check.sleep" ng-change="sliderToNumber()" min="1" max="11" step="1">
+                  <i class="range-min-max-el">11</i><!-- class = "icon ion-plus-round"-->
+          </div>
+          <!--Hours slept-->
+
+
+          <!--Stresslevel-->
+          <span class="ueberschrift-h1-grey">Wie ruig fühlst du dich gerade?</span>
+          <div class = "range">  <!--item -->
+                  <i class="range-min-max-el">1</i>
+                  <input type="range" name = "volume2"  ng-model="check.restedness" ng-change="sliderToNumber()" min="1" max="5" step="1">
+                  <i class="range-min-max-el">5</i>
+          </div>
+          <!--Stresslevel-->
+
+
+          <!-- Weight -->
+          <span class="ueberschrift-h1 ueberschrift-h1-grey ueberschrift-h1-last">Wie viel Kilo wiegst du gerade?</span>
+          <div class="space"></div>
+          <div class="list">
+             <label class="item item-input">
+             <input type="text" ng-model="check.weight" placeholder="Kilogramm">
+             </label>
+          </div>
+          <!-- Weight -->
+
+
+          <button class="button button-full btn btn-info icon ion-plus" type="submit">
+             Checkin abschicken
+          </button>
+    </form>
+
+
+          <button class="button button-full btn btn-danger button button-full btn btn-info icon ion-close" ng-click="checkin.goToCreateCheckin()">
+            Checkin abbrechen
+          </button>
+    </ion-content>
+</ion-view>

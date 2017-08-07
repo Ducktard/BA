@@ -1,0 +1,56 @@
+<ion-view title="Register" hide-back-button=true>
+
+  <ion-nav-buttons side="left">
+      <button ng-click="auth.goToLogin()" class="button button-clear button-positive"><i class = "icon ion-chevron-left"></i></button>
+  </ion-nav-buttons>
+
+  <ion-content class="padding">
+    <ion-item class="card padding">
+      <div class="item-text-wrap padding">
+        Ein paar Eingaben und schon bist du registriert:
+      </div>
+
+<form ng-submit="auth.registerUser(User)">
+      <label class="item item-input">
+        <input type="text" ng-model="User.username" placeholder="Username" />
+      </label>
+
+      <label class="item item-input">
+        <input type="text" ng-model="User.realname" placeholder="Richtiger Name" />
+      </label>
+
+
+      <label class="item item-input">
+        <input type="number" ng-model="User.age" min="16" max="100" placeholder="Alter" />
+      </label>
+
+
+      <span class="ueberschrift-h1"> Welcher Playertyp bist du?</span>
+      <ion-list>
+          <ion-radio ng-model="User.playertype" ng-value="'Achiever'">Achiever</ion-radio>
+          <ion-radio ng-model="User.playertype" ng-value="'Explorer'">Explorer</ion-radio>
+          <ion-radio ng-model="User.playertype" ng-value="'Socializer'">Socializer</ion-radio>
+          <ion-radio ng-model="User.playertype" ng-value="'Team-Player'">Team-Player</ion-radio>
+          <ion-radio ng-model="User.playertype" ng-value="'Winner'">Winner</ion-radio>
+     </ion-list>
+
+
+      <label class="item item-input">
+        <input type="text" ng-model="User.email" placeholder="Email" />
+      </label>
+      <label class="item item-input">
+        <input type="password" ng-model="User.password" placeholder="Passwort" />
+      </label>
+
+      <label class="item item-input">
+        <input type="password" ng-model="User.passwordbestaetigen" placeholder="Passwort bestätigen" />
+      </label>
+
+
+      <div class="padding">
+        <button class="button button-block" type="submit">Account erstellen</button>
+      </div>
+    </ion-item>
+</form>
+  </ion-content>
+</ion-view>

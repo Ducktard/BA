@@ -1,0 +1,30 @@
+<ion-view hide-back-button=true>
+  <ion-nav-title>Meine Orte</ion-nav-title>
+
+  <ion-nav-buttons side="right">
+      <button ng-click="locations.goToCreateLocation()" class="button button-clear button-positive"><i class = "icon ion-plus-round"></i></button>
+  </ion-nav-buttons>
+
+  <ion-nav-buttons side="left">
+      <button ng-click="locations.goToProfile()" class="button button-clear button-positive"><i class = "icon ion-chevron-left"></i></button>
+  </ion-nav-buttons>
+
+
+<ion-content>
+    <ion-list>
+        <span class="ueberschrift-h1-grey" ng-show="!locations.data.length">Bisher noch keine Orte erfasst.</span>
+
+        <ion-item   ng-repeat="loca in locations.data"
+                    class="item-chat item-remove-animate item-avatar item-icon-right"
+                    type="item-text-wrap">
+                            <img ng-src="location-icon.png"/>
+                            <h2><span>Name: </span>{{loca.name}}</h2>
+                            <i class="icon ion-chevron-right icon-accessory"></i>
+                                    <ion-option-button class="button-assertive" ng-click="locations.deleteLocation(loca)">
+                                          Delete
+                                    </ion-option-button>
+      </ion-item>
+    </ion-list>
+</ion-content>
+
+</ion-view>
