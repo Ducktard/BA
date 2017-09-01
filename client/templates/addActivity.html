@@ -1,0 +1,30 @@
+<ion-view cache-view="false" hide-back-button=true>
+  <ion-nav-title>Aktivität hinzufügen</ion-nav-title>
+
+  <ion-nav-buttons side="left">
+      <button ng-click="activities.goToSeeActivities()" class="button button-clear button-positive"><i class = "icon ion-chevron-left"></i></button>
+  </ion-nav-buttons>
+
+  <ion-content>
+    <form ng-submit="activities.saveActivity(newActivity)">
+
+    <!-- ort name -->
+    <span class="ueberschrift-h1 ueberschrift-h1-last">Wie heißt die Aktivität?</span>
+    <div class="space"></div>
+    <div class="list">
+       <label class="item item-input">
+       <input type="text" ng-model="newActivity.name" placeholder="Aktivität">
+       </label>
+
+    </div>
+    <!-- nort name ende  -->
+
+    <button class="button button-full btn btn-info icon ion-plus" type="submit">
+      Aktivität hinzufügen
+    </button>
+
+
+  </form>
+
+  </ion-content>
+</ion-view>

@@ -39,6 +39,11 @@ import seeFoodsTemplateUrl from '../templates/foods.html';
 import seeLocationsTemplateUrl from '../templates/locations.html';
 import addLocationsTemplateUrl from '../templates/addLocation.html';
 
+//activity
+import seeActivitiesTemplateUrl from '../templates/activities.html';
+import addActivitiesTemplateUrl from '../templates/addActivity.html';
+
+
 //collection
 import {Checkins} from '../../lib/collections';
 
@@ -260,6 +265,26 @@ import {Checkins} from '../../lib/collections';
       }
       })
 
+/*Activity stuff*/
+      .state('tab.activities', {
+        url: '/activities',
+        views: {
+          'tab-profile':{
+            templateUrl: seeActivitiesTemplateUrl,
+            controller : 'ActivityCntrl as activities'
+          }
+        }
+      })
+
+      .state('tab.addActivities', {
+      url: '/activities/add',
+      views: {
+        'tab-profile':{
+          templateUrl: addActivitiesTemplateUrl,
+          controller :  'ActivityCntrl as activities'
+        }
+      }
+      })
 
     this.$urlRouterProvider.otherwise('login');
 

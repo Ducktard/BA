@@ -47,7 +47,10 @@ import ChannelCntrl from '../controllers/channel.controller.js';
 import FoodCntrl from '../controllers/food.controller.js';
 
 //locations
-import LocationCntrl from '../controllers/location.controller.js'
+import LocationCntrl from '../controllers/location.controller.js';
+
+//activities
+import ActivityCntrl from '../controllers/activity.controller.js';
 
 
 
@@ -72,6 +75,7 @@ new Loader(App)
   .load(ChannelsCntrl)
   .load(FoodCntrl)
   .load(LocationCntrl)
+  .load(ActivityCntrl)
   .load(RoutesConfig);
 
 // Startup

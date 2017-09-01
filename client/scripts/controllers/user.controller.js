@@ -27,6 +27,10 @@ export default class UserCntrl extends Controller {
     state.go('tab.locations');
   }
 
+  goToActivities(){
+    state.go('tab.activities');
+  }
+
   logout(){
       Meteor.logout();
       state.go('login');

@@ -1,0 +1,34 @@
+<ion-view cache-view="false" title="Meine Aktivitäten" hide-back-button=true>
+
+  <ion-nav-buttons side="right">
+      <button ng-click="activities.goToCreateActivity()" class="button button-clear button-positive"><i class = "icon ion-plus-round"></i></button>
+  </ion-nav-buttons>
+
+  <ion-nav-buttons side="left">
+      <button ng-click="activities.goToProfile()" class="button button-clear button-positive"><i class = "icon ion-chevron-left"></i></button>
+  </ion-nav-buttons>
+
+
+  <ion-content>
+      <ion-list>
+        <span class="ueberschrift-h1-grey margin-left" ng-show="!activities.data.length">Bisher noch keine Aktivitäten erfasst.</span>
+
+          <ion-item ng-repeat="act in activities.data"
+          class="item-chat item-remove-animate item-avatar item-icon-right"
+          type="item-text-wrap">
+        <img ng-src="activity-icon.png"/>
+       <h2><span>Name: </span>{{act.name}}</h2>
+       <h2><span>Kalorien: </span>{{act.calories}} <span>kcal/100g</span></h2>
+       <i class="icon ion-chevron-right icon-accessory"></i>
+
+       <ion-option-button class="button-assertive" ng-click="activities.deleteActivity(act)">
+         Delete
+       </ion-option-button>
+
+     </ion-item>
+   </ion-list>
+
+
+
+  </ion-content>
+</ion-view>
