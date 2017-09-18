@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { Checkins, Overeatings, Channel, Messages, Foods, Locations, Activities, Goals} from '../lib/collections';
+import { Checkins, Overeatings, Channel, Messages, Foods, Locations, Activities, Goals,LeaderboardEntries} from '../lib/collections';
 
 /**
  * @author Mario Curkovic
@@ -16,11 +16,20 @@ import { Checkins, Overeatings, Channel, Messages, Foods, Locations, Activities,
 
 Meteor.publish('users', function() {
   console.log("avhkjwblch",Meteor.users.find({"object.userId": Meteor.userId()}) );
-  return Meteor.users.find({"object.userId": Meteor.userId()});
+  return {
+      find(){
+        Meteor.users.find({"object.userId": Meteor.userId()});
+      }
+    }
 });
 
-
-
+Meteor.publishComposite('leaderboardEntries', function(){
+    return{
+      find() {
+        return LeaderboardEntries.find();
+      }
+    }
+});
 
 Meteor.publishComposite('foods', function(){
     return{

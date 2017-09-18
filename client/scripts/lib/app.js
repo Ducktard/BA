@@ -56,8 +56,8 @@ import LocationCntrl from '../controllers/location.controller.js';
 //activities
 import ActivityCntrl from '../controllers/activity.controller.js';
 
-
-
+//leaderboard
+import LeaderboardCntrl from '../controllers/leaderboard.controller.js';
 
 const App = 'Ellipsa';
 
@@ -82,6 +82,7 @@ new Loader(App)
   .load(FoodCntrl)
   .load(LocationCntrl)
   .load(ActivityCntrl)
+  .load(LeaderboardCntrl)
   .load(RoutesConfig);
 
 // Startup

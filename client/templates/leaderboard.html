@@ -1,0 +1,34 @@
+<ion-view cache-view="false" title="Rangliste" hide-back-button=false>
+
+  <ion-nav-buttons side="left">
+      <button id="info-button" ng-click="lead.info()" class="button button-clear button-positive"><i class="icon ion-information"></i></button>
+  </ion-nav-buttons>
+
+  <ion-content>
+
+  
+
+      <ion-list>
+          <span class="ueberschrift-h1-grey" ng-show="!lead.alluserdata.length">Bisher noch keine Checkins oder Essattacken.</span>
+
+          <ion-item
+          ng-repeat="e in lead.allBoardEntries"
+          class="item-chat item-remove-animate item-avatar item-icon-right"
+          type="item-text-wrap">
+
+
+
+        <img ng-src="{{e.type == 'Checkin' && 'green-checkmark.png' || 'red-cross-2.png'}}"/>
+        <h2><span></span>Username: {{e.username}}</h2>
+       <span class="last-message-timestamp">Spielertyp: {{ e.playertype }}</span>
+
+
+
+
+     </ion-item>
+   </ion-list>
+
+
+
+  </ion-content>
+</ion-view>

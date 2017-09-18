@@ -50,6 +50,8 @@ import addLocationsTemplateUrl from '../templates/addLocation.html';
 import seeActivitiesTemplateUrl from '../templates/activities.html';
 import addActivitiesTemplateUrl from '../templates/addActivity.html';
 
+//leaderboard
+import leaderboardTemplateUrl from '../templates/leaderboard.html';
 
 //collection
 import {Checkins} from '../../lib/collections';
@@ -162,6 +164,17 @@ import {Checkins} from '../../lib/collections';
          'tab-goals':{
            templateUrl: goalsTemplateUrl,
            controller: 'CheckinCntrl as checkin'
+         }
+       }
+     })
+
+     //goals
+     .state('tab.leaderboard',{
+       url: '/leaderboard',
+       views: {
+         'tab-leaderboard':{
+           templateUrl: leaderboardTemplateUrl,
+           controller: 'LeaderboardCntrl as lead'
          }
        }
      })

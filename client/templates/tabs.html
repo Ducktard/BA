@@ -12,8 +12,12 @@
     <ion-nav-view name="tab-create-overeating"></ion-nav-view>
   </ion-tab>
 
-  <ion-tab ng-if="$root.currentUser.profile.playertype == 'Achiever'" title="Ziele" icon-on="ion-ios-list" icon-off="ion-ios-list-outline" href="#/tab/goals">
+  <ion-tab ng-if="$root.currentUser.profile.playertype == 'Achiever'" title="Ziele" icon-on="ion-ios-checkmark" icon-off="ion-ios-checkmark-outline" href="#/tab/goals">
       <ion-nav-view  name="tab-goals"></ion-nav-view>
+  </ion-tab>
+
+  <ion-tab ng-if="$root.currentUser.profile.playertype == 'Winner'" title="Rangliste" icon-on="ion-ios-list" icon-off="ion-ios-list-outline" href="#/tab/leaderboard">
+      <ion-nav-view  name="tab-leaderboard"></ion-nav-view>
   </ion-tab>
 
  <ion-tab ng-if="true" title="Meine Historie" icon-on="ion-ios-pulse-strong" icon-off="ion-ios-pulse" href="#/tab/history">

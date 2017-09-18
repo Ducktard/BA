@@ -40,9 +40,9 @@ export default class CheckinCntrl extends Controller {
 
     numOfCheckinsInCurrentLevel = this.numOfCheckinsInCurrentLevel;
 
-      this.subscribe('goals', function(){
-        this.currentGoal =  Goals.findOne({"level":currentLevel});
-      });
+    this.subscribe('goals', function(){
+      this.currentGoal =  Goals.findOne({"level":currentLevel});
+    });
 
 
 
@@ -55,7 +55,7 @@ export default class CheckinCntrl extends Controller {
       currentGoal(){return Goals.findOne({"level":currentLevel});},
       maxLevel(){return Goals.find().count();}
     });
-}
+  }
 
 
   goToHistory(){
@@ -102,22 +102,24 @@ export default class CheckinCntrl extends Controller {
 
 
   createCheckin(object,NumOfCheckinsInCurrentLevel,NumOfOvereatingsInCurrentLevel,currentGoal,maxLevel){
+    
     if(this.checkIfCheckinIsValid(object)){
       object.date = new Date();
       object.userId = Meteor.userId();
       object.type = "Checkin";
       this.callMethod('createCheckinOrOvereating', object);
 
-      // console.log("NumOfCheckinsInCurrentLevel: " + NumOfCheckinsInCurrentLevel
-      //             + " NumOfOvereatingsInCurrentLevel: " + NumOfOvereatingsInCurrentLevel
-      //             	+ " currentGoal: " + currentGoal)
-        if((NumOfCheckinsInCurrentLevel+1) >= currentGoal.checkins){
-          if(NumOfOvereatingsInCurrentLevel <= currentGoal.overeatings){
-            msg = this.callMethod('moveToNextLevel',Meteor.userId(),maxLevel);
-          }
-        }
+      if((NumOfCheckinsInCurrentLevel+1) >= currentGoal.checkins){
+        if(NumOfOvereatingsInCurrentLevel <= currentGoal.overeatings){ // checking if user has enough checkins to enter next level
+          this.callMethod('moveToNextLevel',Meteor.userId(),maxLevel, function(){
+            this.createAlert("Mit diesem Checkin haben Sie das nächste Level erreicht!" +
+            " Willkommen in Level " + (currentGoal.level +1) ,"Checkin erfolgreich");
 
+          }); // enter next level if there is one
+        }
+      }
       this.createAlert("Checkin wurde erfolgreich gespeichert. ","Checkin erfolgreich");
+
       setTimeout(state.go('tab.createCheckin'), 1000);
     }
   }
