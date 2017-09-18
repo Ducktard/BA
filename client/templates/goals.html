@@ -20,7 +20,6 @@
       <div class="item item-divider">
         Noch {{checkin.currentGoal.checkins - checkin.numOfCheckinsInCurrentLevel}} Checkins bis Level {{checkin.currentLevel + 1}}
       </div>
-      Test:  {{checkin.levelGoalDate}}
       <div ng-morris-donut-chart
       chart-options="{colors:['#eaeaea','#00b200']}"
       chart-data="[{label: 'Checkins bis zum Ziel', value: checkin.currentGoal.checkins - checkin.numOfCheckinsInCurrentLevel},

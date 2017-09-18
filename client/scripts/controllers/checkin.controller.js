@@ -42,17 +42,9 @@ export default class CheckinCntrl extends Controller {
 
       this.subscribe('goals', function(){
         this.currentGoal =  Goals.findOne({"level":currentLevel});
-        console.log("currentgoal inside subscribe: " + this.currentGoal);
       });
 
-      // this.currentGoalCheckins = this.currentGoal.checkins;
 
-
-      // // this.currentGoalOvereatings = Goals.findOne({"level":currentLevel}).overeatings;
-      // this.nextGoal = Goals.findOne({"level":currentLevel+1});
-      // this.nextGoalCheckins = this.nextGoal.checkins;
-      // // this.nextGoalOvereatings = Goals.findOne({"level":currentLevel+1}).overeatings;
-    // });
 
 
     this.helpers({
@@ -61,31 +53,8 @@ export default class CheckinCntrl extends Controller {
       getNumOfCheckinsInCurrentLevel(){return Checkins.find({"type":"Checkin","date": {$gt: levelReachedDate}}).count();},
       getNumOfOvereatingsInCurrentLevel(){return Checkins.find({"type":"Overeating","date": {$gt: levelReachedDate}}).count();},
       currentGoal(){return Goals.findOne({"level":currentLevel});}
-
     });
-
-    this.leftCheckinsToNextLevel = this.getCheckins;
-
-
-
-    this.goalChart = {
-      data: [
-        {label: 'Checkins bis zum Ziel', value: 3},
-        {label: 'erledigte Checkins', value: 2}
-      ],
-      options:{
-        colors:['#eaeaea','#00b200']
-      }
-    };
-  }
-  checkIfLevelIsReached(userId){
-    // if()
-    // if(Checkins.count()>=
-    return false;
-  }
-
-  // {label: 'Checkins bis zum Ziel', value:chckns.length},
-  // {label: 'erledigte Checkins', value: goalValue > this.getCheckins.length && this.goalValue - this.getCheckins.length || '0' }
+}
 
 
   goToHistory(){
@@ -102,14 +71,34 @@ export default class CheckinCntrl extends Controller {
     state.go('tab.createCheckin');
   }
 
-  dateToString(date){
+  dateToStringWithTime(date){
     if(date instanceof Date){
-      return (date.getUTCDay()+1) + "." + date.getUTCMonth() + "." + date.getFullYear() + " , " + date.getUTCHours() + ":" + date.getUTCMinutes() + " Uhr";
+      return (date.getDate()) + "." + (date.getUTCMonth()+1) + "." + date.getFullYear() + " , " + date.getUTCHours() + ":" + date.getUTCMinutes() + " Uhr";
     }else{
       s = new Date(date);
-      return (s.getUTCDay()+1) + "." + s.getUTCMonth() + "." + s.getFullYear() + " , " + s.getUTCHours() + ":" + s.getUTCMinutes() + " Uhr";
+      return (s.getDate()) + "." + (s.getUTCMonth()+1) + "." + s.getFullYear() + " , " + s.getUTCHours() + ":" + s.getUTCMinutes() + " Uhr";
     }
   }
+
+  dateToString(date){
+    if(date instanceof Date){
+      return (date.getDate()) + "." + (date.getUTCMonth()+1) + "." + date.getFullYear() ;
+    }else{
+      s = new Date(date);
+      return (s.getDate()) + "." + (s.getUTCMonth()+1) + "." + s.getFullYear() ;
+    }
+  }
+
+  checkIfLevelIsReached(){
+    if(this.getNumOfCheckinsInCurrentLevel >= this.currentGoal.checkins){
+      if(this.getNumOfOvereatingsInCurrentLevel <= this.currentGoal.overeatings){
+        return true;
+      }
+    }else{
+      return false;
+    }
+  }
+
 
   createCheckin(object){
     if(this.checkIfCheckinIsValid(object)){
@@ -117,8 +106,10 @@ export default class CheckinCntrl extends Controller {
       object.userId = Meteor.userId();
       object.type = "Checkin";
       this.callMethod('createCheckinOrOvereating', object);
-      if(this.callMethod('checkIfLevelIsReached', Meteor.userId())){
-        this.callMethod('moveToNextLevel',Meteor.userId());
+      // var checkIfNextLevel = this.callMethod('checkIfLevelIsReached', Meteor.userId());
+      // console.log("checkIfNextLevel in methods: "+ this.checkIfLevelIsReached());
+      if(this.checkIfLevelIsReached()){
+         msg = this.callMethod('moveToNextLevel',Meteor.userId());
       }
       this.createAlert("Checkin wurde erfolgreich gespeichert. ","Checkin erfolgreich");
       setTimeout(state.go('tab.createCheckin'), 1000);
