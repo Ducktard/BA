@@ -4,6 +4,9 @@ import { Runner } from 'angular-ecmascript/module-helpers';
 
 import { Meteor } from 'meteor/meteor';
 
+//index
+import indexTemplateUrl from '../index.html';
+
 //tabs
 import tabsTemplateUrl from '../templates/tabs.html';
 
@@ -20,8 +23,12 @@ import createcheckinemplateUrl from '../templates/createcheckin.html';
 import overeatingTemplateUrl from '../templates/overeating.html';
 import createOvereatingTemplate from '../templates/createovereating.html';
 
+//goals -> only visible for achievers
+import goalsTemplateUrl from '../templates/goals.html';
+
 //history
 import historyTemplateUrl from '../templates/history.html';
+import savedCheckinTemplateUrl from '../templates/savedCheckin.html';
 
 //profile
 import profileTemplateUrl from '../templates/profile.html';
@@ -47,7 +54,6 @@ import addActivitiesTemplateUrl from '../templates/addActivity.html';
 //collection
 import {Checkins} from '../../lib/collections';
 
-
 /**
  * @author Mario Curkovic
  *
@@ -66,6 +72,7 @@ import {Checkins} from '../../lib/collections';
 
   configure() {
     this.$stateProvider
+
       .state('tab', {
         url: '/tab',
         abstract: true,
@@ -148,6 +155,16 @@ import {Checkins} from '../../lib/collections';
               }
      })
 
+     //goals
+     .state('tab.goals',{
+       url: '/goals',
+       views: {
+         'tab-goals':{
+           templateUrl: goalsTemplateUrl,
+           controller: 'CheckinCntrl as checkin'
+         }
+       }
+     })
 
      //history
      .state('tab.history',{
@@ -155,15 +172,18 @@ import {Checkins} from '../../lib/collections';
        views: {
          'tab-history': {
        templateUrl: historyTemplateUrl,
-       resolve: {
-
-        },
        controller:  'CheckinCntrl as checkin'
                         }
               }
      })
 
-
+     .state('savedCheckin',{
+       url: '/history/:checkInId',
+           templateUrl: savedCheckinTemplateUrl,
+           //important otherwise the channelId in the $stateParams sometimes dont get updated
+           cache: false,
+           controller:   'CheckinCntrl as checkin'
+     })
 
      .state('tab.channels',{
        url: '/channels',
@@ -218,7 +238,7 @@ import {Checkins} from '../../lib/collections';
           views: {
             'tab-profile': {
               templateUrl: profileTemplateUrl,
-              controller : 'UserCntrl as usr'
+              controller: 'UserCntrl as usr'
             }
           }
         })

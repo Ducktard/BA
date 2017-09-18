@@ -1,0 +1,59 @@
+<ion-view cache-view="false" title="{{checkin.savedCheckinData.type}} am {{checkin.dateToString(checkin.savedCheckinData.date)}}" hide-back-button=true>
+
+  <ion-nav-buttons side="left">
+      <button ng-click="checkin.goToHistory()" class="button button-clear button-positive"><i class = "icon ion-chevron-left"></i></button>
+  </ion-nav-buttons>
+
+  <ion-nav-buttons side="right">
+      <button id="info-button" ng-click="checkin.savedCheckinInfo()" class="button button-clear button-positive"><i class="icon ion-information"></i></button>
+  </ion-nav-buttons>
+
+
+
+  <ion-content >
+      <form>
+          <div class="card list">
+              <div class="item item-divider">
+                  Dein Stresslevel
+              </div>
+
+              <div class="item item-text-wrap">
+                  {{checkin.savedCheckinData.stress}}
+              </div>
+            </div>
+
+            <div class="card list">
+                <div class="item item-divider">
+                    Dein Hungergefühl
+                </div>
+
+                <div class="item item-text-wrap">
+                    {{checkin.savedCheckinData.hunger}}
+                </div>
+              </div>
+
+              <div class="card list">
+                  <div class="item item-divider">
+                      Soviele Stunden Schlaf hattest du
+                  </div>
+
+                  <div class="item item-text-wrap">
+                      {{checkin.savedCheckinData.sleep}}
+                  </div>
+                </div>
+
+            <div class="card list">
+              <div class="item item-divider">
+                  {{checkin.savedCheckinData.type == 'Checkin' && ' Dein Gewicht' || 'Daran hast du dich überfressen'}}
+              </div>
+
+              <div class="item item-text-wrap">
+                  {{checkin.savedCheckinData.type == 'Checkin' && checkin.savedCheckinData.weight || checkin.savedCheckinData.foods }}
+              </div>
+            </div>
+
+
+
+
+  </ion-content>
+</ion-view>

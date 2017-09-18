@@ -49,13 +49,15 @@ export default class UserCntrl extends Controller {
  */
   createAlert(message, header){
     ionicPopup.alert({
-                title: header,
+                  title: header,
                   template: message,
-                    okType: 'button-positive button-clear'
+                  okType: 'button-positive button-clear'
           });
   }
 
-
+isAchiever(){
+   return false;
+}
 
 }
 

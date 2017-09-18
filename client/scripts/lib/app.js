@@ -14,6 +14,10 @@ import Loader from 'angular-ecmascript/module-loader';
 import 'ionic-scripts';
 import Angular from 'angular';
 import { Meteor } from 'meteor/meteor';
+import 'ng-morris-js';
+import 'morris.js/morris.js';
+import 'raphael';
+
 
 //package for Authentication
 import { Accounts } from 'meteor/accounts-base';
@@ -61,7 +65,9 @@ const App = 'Ellipsa';
 Angular.module(App, [
   'angular-meteor',
   'angularMoment',
-  'ionic'
+  'ionic',
+  'ng-morris-js'
+
 ]);
 
 

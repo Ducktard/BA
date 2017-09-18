@@ -1,24 +1,27 @@
 <ion-tabs class="tabs-stable tabs-icon-top tabs-color-positive" ng-cloak>
 
-  <ion-tab title="Mein Profil" icon-on="ion-ios-person" icon-off="ion-ios-person-outline" href="#/tab/profile">
+  <ion-tab ng-if="true" title="Mein Profil" icon-on="ion-ios-person" icon-off="ion-ios-person-outline" href="#/tab/profile">
     <ion-nav-view name="tab-profile"></ion-nav-view>
   </ion-tab>
 
-  <ion-tab title="Checkin erstellen" icon-on="ion-ios-plus" icon-off="ion-ios-plus-outline"  href="#/tab/checkin/create">
+  <ion-tab ng-if="true" title="Checkin erstellen" icon-on="ion-ios-plus" icon-off="ion-ios-plus-outline"  href="#/tab/checkin/create">
     <ion-nav-view name="tab-create-checkin"></ion-nav-view>
   </ion-tab>
 
-   <ion-tab title="Overeating erstellen"  icon-on="ion-ios-plus" icon-off="ion-ios-plus-outline"  href="#/tab/overeating/create">
+   <ion-tab ng-if="true" title="Overeating erstellen"  icon-on="ion-ios-plus" icon-off="ion-ios-plus-outline"  href="#/tab/overeating/create">
     <ion-nav-view name="tab-create-overeating"></ion-nav-view>
   </ion-tab>
 
- <ion-tab title="Meine Historie" icon-on="ion-ios-pulse-strong" icon-off="ion-ios-pulse" href="#/tab/history">
+  <ion-tab ng-if="$root.currentUser.profile.playertype == 'Achiever'" title="Ziele" icon-on="ion-ios-list" icon-off="ion-ios-list-outline" href="#/tab/goals">
+      <ion-nav-view  name="tab-goals"></ion-nav-view>
+  </ion-tab>
+
+ <ion-tab ng-if="true" title="Meine Historie" icon-on="ion-ios-pulse-strong" icon-off="ion-ios-pulse" href="#/tab/history">
     <ion-nav-view name="tab-history"></ion-nav-view>
   </ion-tab>
 
-  <ion-tab title="Channel" icon-on="ion-ios-chatbubble" icon-off="ion-ios-chatbubble-outline" href="#/tab/channels">
+  <ion-tab ng-if="true" title="Channel" icon-on="ion-ios-chatbubble" icon-off="ion-ios-chatbubble-outline" href="#/tab/channels">
       <ion-nav-view name="tab-channel"></ion-nav-view>
   </ion-tab>
-
 
 </ion-tabs>

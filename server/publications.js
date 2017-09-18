@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { Checkins, Overeatings, Channel, Messages, Foods, Locations, Activities} from '../lib/collections';
+import { Checkins, Overeatings, Channel, Messages, Foods, Locations, Activities, Goals} from '../lib/collections';
 
 /**
  * @author Mario Curkovic
@@ -56,6 +56,13 @@ Meteor.publishComposite('checkins', function(){
     }
 });
 
+Meteor.publishComposite('goals', function(){
+    return{
+      find() {
+        return Goals.find();
+      }
+    }
+});
 
 Meteor.publishComposite('channel', function(){
     return{
