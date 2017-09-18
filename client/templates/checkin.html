@@ -7,7 +7,7 @@
 
 
   <ion-content>
-    <form ng-submit="checkin.createCheckin(check)">
+    <form ng-submit="checkin.createCheckin(check,checkin.getNumOfCheckinsInCurrentLevel, checkin.getNumOfOvereatingsInCurrentLevel,checkin.currentGoal, checkin.maxLevel)">
 
           <!--Stresslevel-->
           <div class="space"></div>

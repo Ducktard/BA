@@ -1,6 +1,5 @@
 import { Controller } from 'angular-ecmascript/module-helpers';
 import { Meteor } from 'meteor/meteor';
-
 /**
  * Controller for managing the profile.
  */
@@ -15,6 +14,7 @@ export default class UserCntrl extends Controller {
 
       this.helpers({
         userdata(){ return Meteor.user();}
+
       });
 
   }

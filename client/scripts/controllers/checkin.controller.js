@@ -52,7 +52,8 @@ export default class CheckinCntrl extends Controller {
       savedCheckinData() {return Checkins.findOne({_id: checkInId});},
       getNumOfCheckinsInCurrentLevel(){return Checkins.find({"type":"Checkin","date": {$gt: levelReachedDate}}).count();},
       getNumOfOvereatingsInCurrentLevel(){return Checkins.find({"type":"Overeating","date": {$gt: levelReachedDate}}).count();},
-      currentGoal(){return Goals.findOne({"level":currentLevel});}
+      currentGoal(){return Goals.findOne({"level":currentLevel});},
+      maxLevel(){return Goals.find().count();}
     });
 }
 
@@ -100,17 +101,22 @@ export default class CheckinCntrl extends Controller {
   }
 
 
-  createCheckin(object){
+  createCheckin(object,NumOfCheckinsInCurrentLevel,NumOfOvereatingsInCurrentLevel,currentGoal,maxLevel){
     if(this.checkIfCheckinIsValid(object)){
       object.date = new Date();
       object.userId = Meteor.userId();
       object.type = "Checkin";
       this.callMethod('createCheckinOrOvereating', object);
-      // var checkIfNextLevel = this.callMethod('checkIfLevelIsReached', Meteor.userId());
-      // console.log("checkIfNextLevel in methods: "+ this.checkIfLevelIsReached());
-      if(this.checkIfLevelIsReached()){
-         msg = this.callMethod('moveToNextLevel',Meteor.userId());
-      }
+
+      // console.log("NumOfCheckinsInCurrentLevel: " + NumOfCheckinsInCurrentLevel
+      //             + " NumOfOvereatingsInCurrentLevel: " + NumOfOvereatingsInCurrentLevel
+      //             	+ " currentGoal: " + currentGoal)
+        if((NumOfCheckinsInCurrentLevel+1) >= currentGoal.checkins){
+          if(NumOfOvereatingsInCurrentLevel <= currentGoal.overeatings){
+            msg = this.callMethod('moveToNextLevel',Meteor.userId(),maxLevel);
+          }
+        }
+
       this.createAlert("Checkin wurde erfolgreich gespeichert. ","Checkin erfolgreich");
       setTimeout(state.go('tab.createCheckin'), 1000);
     }
