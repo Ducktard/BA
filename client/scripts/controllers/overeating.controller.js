@@ -45,6 +45,7 @@ export default class OvereatingCntrl extends Controller{
             object.type = "Overeating";
             object.foods = this.foods;
             this.callMethod('createCheckinOrOvereating', object);
+            this.callMethod('addPoints',Meteor.userId(),-10);
             this.createAlert("Essattacke wurde erfolgreich gespeichert. ", "Erfassung erfolgreich");
             setTimeout(state.go('tab.createOvereating'),1000);
           //delete foods list

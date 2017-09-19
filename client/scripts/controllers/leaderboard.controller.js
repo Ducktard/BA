@@ -2,24 +2,29 @@ import { Controller } from 'angular-ecmascript/module-helpers';
 import { Meteor } from 'meteor/meteor';
 import {Accounts} from '../../../lib/collections';
 import {LeaderboardEntries} from '../../../lib/collections';
+import { Session } from 'meteor/session';
 
 /**
-  * @author Johannes Weyers
-  * Controller for managing the profile.
-  */
+* @author Johannes Weyers
+* Controller for managing the profile.
+*/
 export default class LeaderboardCntrl extends Controller {
 
 
   constructor(){
-      super(...arguments);
+    super(...arguments);
 
-      ionicPopup = this.$ionicPopup;
-      state = this.$state;
+    ionicPopup = this.$ionicPopup;
+    state = this.$state;
 
-      this.subscribe("leaderboardEntries");
-      this.helpers({
-        allBoardEntries(){ return LeaderboardEntries.find();}
-      });
+    this.subscribe("leaderboardEntries");
+
+
+
+    this.helpers({
+      allBoardEntries(){ return LeaderboardEntries.find();},
+
+    });
 
   }
 
@@ -34,17 +39,17 @@ export default class LeaderboardCntrl extends Controller {
     " ","Info");
   }
 
-/**
- * Method for creating an alert.
- * @param message
- * @param header
- */
+  /**
+  * Method for creating an alert.
+  * @param message
+  * @param header
+  */
   createAlert(message, header){
     ionicPopup.alert({
-                  title: header,
-                  template: message,
-                  okType: 'button-positive button-clear'
-          });
+      title: header,
+      template: message,
+      okType: 'button-positive button-clear'
+    });
   }
 
 

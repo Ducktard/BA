@@ -45,8 +45,6 @@ export default class CheckinCntrl extends Controller {
     });
 
 
-
-
     this.helpers({
       data() {return Checkins.find();},
       savedCheckinData() {return Checkins.findOne({_id: checkInId});},
@@ -102,18 +100,19 @@ export default class CheckinCntrl extends Controller {
 
 
   createCheckin(object,NumOfCheckinsInCurrentLevel,NumOfOvereatingsInCurrentLevel,currentGoal,maxLevel){
-    
+
     if(this.checkIfCheckinIsValid(object)){
       object.date = new Date();
       object.userId = Meteor.userId();
       object.type = "Checkin";
       this.callMethod('createCheckinOrOvereating', object);
-
+      this.callMethod('addPoints',Meteor.userId(),5);
       if((NumOfCheckinsInCurrentLevel+1) >= currentGoal.checkins){
         if(NumOfOvereatingsInCurrentLevel <= currentGoal.overeatings){ // checking if user has enough checkins to enter next level
           this.callMethod('moveToNextLevel',Meteor.userId(),maxLevel, function(){
             this.createAlert("Mit diesem Checkin haben Sie das nächste Level erreicht!" +
             " Willkommen in Level " + (currentGoal.level +1) ,"Checkin erfolgreich");
+            this.callMethod('addPoints',Meteor.userId(),15);
 
           }); // enter next level if there is one
         }

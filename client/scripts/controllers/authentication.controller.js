@@ -1,7 +1,7 @@
 import { Controller } from 'angular-ecmascript/module-helpers';
 import {Meteor} from 'meteor/meteor';
 import {LeaderboardEntries} from '../../../lib/collections';
-import { Session } from 'meteor/session'
+import { Session } from 'meteor/session';
 /**
 * @author Mario Curkovic
 *

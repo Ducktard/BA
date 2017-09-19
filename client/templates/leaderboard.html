@@ -6,7 +6,12 @@
 
   <ion-content>
 
-
+    <div class="row header">
+      <div class="col">Platz:</div>
+      <div class="col">Username:</div>
+      <div class="col">Punkte:</div>
+      <div class="col">Level:</div>
+    </div>
 
     <ion-list>
       <span class="ueberschrift-h1-grey" ng-show="!lead.allBoardEntries.length">Bisher noch keine Konkurrenten auf der Rangliste</span>
@@ -15,12 +20,13 @@
       ng-repeat="e in lead.allBoardEntries"
       class="item-chat item-remove-animate item-avatar item-icon-right"
       type="item-text-wrap">
-      <h2><span></span>{{e.username}}</h2>
-      <span class="label-leaderboard-level">Punkte: {{ e.points }}</span>
-      <span class="label-leaderboard-points">Level: {{ e.level }}</span>
 
-
-
+      <div class="row header">
+        <div class="col">{{ $index + 1 }}</div>
+        <div class="col">{{e.username}}</div>
+        <div class="col">{{ e.points }}</div>
+        <div class="col"> {{ e.level }}</div>
+      </div>
 
     </ion-item>
   </ion-list>
