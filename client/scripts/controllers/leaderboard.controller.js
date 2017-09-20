@@ -1,6 +1,5 @@
 import { Controller } from 'angular-ecmascript/module-helpers';
 import { Meteor } from 'meteor/meteor';
-import {Accounts} from '../../../lib/collections';
 import {LeaderboardEntries} from '../../../lib/collections';
 import { Session } from 'meteor/session';
 
@@ -27,12 +26,6 @@ export default class LeaderboardCntrl extends Controller {
     });
 
   }
-
-
-
-
-
-
 
   info(){
     this.createAlert("Hier kannst du sehen wie gut du im Vergleich zu anderen Nutzern bist "+

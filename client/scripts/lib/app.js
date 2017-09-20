@@ -34,6 +34,9 @@ import RoutesRunner from '../routes';
 //auth
 import AuthenticationCntrl from '../controllers/authentication.controller.js';
 
+//tabs TabCntrl
+import TabCntrl from '../controllers/tab.controller.js';
+
 //checkin CheckinCntrl
 import CheckinCntrl from '../controllers/checkin.controller.js';
 
@@ -73,6 +76,7 @@ Angular.module(App, [
 
 new Loader(App)
   .load(CalendarFilter)
+  .load(TabCntrl)
   .load(AuthenticationCntrl)
   .load(CheckinCntrl)
   .load(OvereatingCntrl)

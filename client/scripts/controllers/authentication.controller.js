@@ -17,12 +17,11 @@ export default class AuthenticationCntrl extends Controller {
     state = this.$state;
 
     this.subscribe("leaderboardEntries");
-
+    // Session.set('userExists',"default");
     this.helpers({
-      existingUser(){
-        Session.set("userExists",LeaderboardEntries.find({"username":Session.get('username')}));
-        return Session.get('userExists');
-      }
+    //   existingUser(){
+    //     return LeaderboardEntries.find({"username":Session.get('username')});
+    //   }
     });
   }
 
@@ -35,12 +34,15 @@ export default class AuthenticationCntrl extends Controller {
     state.go('login');
   }
 
-  setUsernameSession(username){
-    Session.set('username', username);
-  }
 
-  registerUser(User,existingUser){
-    if(this.checkIfUserValid(User,existingUser)){
+
+  registerUser(User){
+
+    Session.set('userExists',LeaderboardEntries.findOne({"username":User.username}));
+
+    console.log(Session.get('userExists') + " ok funzt das? " + User.username);
+
+      if(this.checkIfUserValid(User)){
       this.callMethod('newUser',User);
       //go to route
       this.$state.go('login');
@@ -101,11 +103,13 @@ export default class AuthenticationCntrl extends Controller {
     }
     //everything is valid
 
-      if(Session.get('userExists') != null){
+    // console.log("in checkIfUserValid , userExists: " + u.username);
+      if(Session.get('userExists')){
         console.log("Username ist bereits vergeben! Bitte wählen Sie einen anderen Username.");
         this.createAlert("Username ist bereits vergeben! Bitte wählen Sie einen anderen Username.", "Registrierung fehlgeschlagen");
         return false;
       }else{
+        this.createAlert("Sie können sich nun mit den eingegeben Daten anmelden.", "Registrierung erfolgreich");
         return true;
       }
 

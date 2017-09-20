@@ -10,7 +10,7 @@
         Ein paar Eingaben und schon bist du registriert:
       </div>
 
-<form ng-submit="auth.setUsernameSession(User.username); auth.registerUser(User,auth.existingUser)">
+<form ng-submit="auth.registerUser(User)">
       <label class="item item-input">
         <input type="text" ng-model="User.username" placeholder="Username" />
       </label>

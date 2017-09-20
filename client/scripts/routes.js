@@ -53,6 +53,8 @@ import addActivitiesTemplateUrl from '../templates/addActivity.html';
 //leaderboard
 import leaderboardTemplateUrl from '../templates/leaderboard.html';
 
+
+
 //collection
 import {Checkins} from '../../lib/collections';
 
@@ -80,6 +82,7 @@ import {Checkins} from '../../lib/collections';
         abstract: true,
         cache: false,
         templateUrl: tabsTemplateUrl,
+        controller : 'TabCntrl as tab'
         //TODO: how to secure route?!?
       /*  resolve: {
         //       user: this.isAuthorized,
