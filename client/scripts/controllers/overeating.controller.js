@@ -14,7 +14,7 @@ export default class OvereatingCntrl extends Controller{
       ionicActionSheet = this.$ionicActionSheet;
       ionicPopup = this.$ionicPopup;
       state = this.$state;
-
+      Session.set('newMsg',Messages.find({"readBy": {$ne: Meteor.userId()},"access":{$in: [Meteor.user().username,"all"]}}).count());
       this.subscribe('foods');
       this.subscribe('locations');
 

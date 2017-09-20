@@ -16,7 +16,7 @@ export default class CheckinCntrl extends Controller {
 
   constructor(){
     super(...arguments);
-
+Session.set('newMsg',Messages.find({"readBy": {$ne: Meteor.userId()},"access":{$in: [Meteor.user().username,"all"]}}).count());
     ionicActionSheet = this.$ionicActionSheet;
     ionicPopup = this.$ionicPopup;
     state = this.$state;

@@ -22,20 +22,21 @@
         </div>
       </div>
     </ion-content>
-    <ion-footer-bar ng-if="channel.data.name != 'news'" keyboard-attach class="bar-stable footer-chat item-input-inset">
+    <ion-footer-bar ng-if="channel.data.name != 'news' " keyboard-attach class="bar-stable footer-chat item-input-inset">
 
       <label class="item-input-wrapper">
         <input ng-model="object.message"
         dir="auto"
         type="text"
         class="input-chat-field"
-        on-return="chat.sendMessage(); chat.closeKeyboard()"
-        on-focus="chat.inputUp()"
-        on-blur="chat.inputDown()"/>
+        on-return="channel.sendMessage(); chat.closeKeyboard()"
+        on-focus="channel.inputUp()"
+        on-blur="channel.inputDown()"
+        />
       </label>
 
       <span>
-        <button ng-if="object.message || object.message.length ===0" ng-click="channel.visibility == 'public'? channel.saveMessage(object,true) : channel.saveMessage(object, false)" class="button button-clear button-positive">Senden</button>
+        <button  ng-if="object.message || object.message.length ===0"  ng-click="channel.visibility == 'public'? channel.saveMessage(object,true) : channel.saveMessage(object, false)" class="button button-clear button-positive">Senden</button>
       </span>
       <span>
         <i class="buttons-seperator icon ion-android-more-vertical"></i>

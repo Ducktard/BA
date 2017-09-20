@@ -2,34 +2,55 @@
   <ion-nav-title>Channel erstellen</ion-nav-title>
 
   <ion-nav-buttons side="left">
-      <button ng-click="channels.goToChannels()" class="button button-clear button-positive"><i class = "icon ion-chevron-left"></i></button>
+    <button ng-click="channels.goToChannels()" class="button button-clear button-positive"><i class = "icon ion-chevron-left"></i></button>
   </ion-nav-buttons>
 
 
   <ion-content>
 
-<form ng-submit="channels.createChannel(obj)">
+    <form ng-submit="channels.createChannel(obj)">
       <!-- Channel -->
       <span class="ueberschrift-h1 ueberschrift-h1-last">Wie soll der Channel heißen?</span>
       <div class="space"></div>
       <div class="list">
-         <label class="item item-input">
-           <i class="ion-pound"></i>
-           <input type="text" ng-model="obj.name" placeholder="Channel name">
-         </label>
-
-         <label class="item item-input">
-          <i class="icon ion-information placeholder-icon"></i>
-          <input type="text" ng-model="obj.description"placeholder="Beschreibung">
+        <label class="item item-input">
+          <i class="ion-pound"></i>
+          <input type="text" ng-model="obj.name" placeholder="Channel name">
         </label>
 
+        <label class="item item-input">
+
+          <input type="text" ng-model="obj.description"placeholder="Beschreibung">
+        </label>
+        <ion-radio name="visibility" ng-model="obj.visibility" ng-value="'{{channels.visibilityChoicePublic}}'" >
+          <img ng-src="public-icon-small.png">
+          {{channels.visibilityChoicePublic}}
+        </ion-radio>
+        <ion-radio name="visibility" ng-model="obj.visibility" ng-value="'{{channels.visibilityChoicePrivate}}'" >
+          <img ng-src="private-icon-small.png">
+          {{channels.visibilityChoicePrivate}}
+        </ion-radio>
+        <form   ng-if="obj.visibility == 'private'">
+          <ion-item ng-repeat="permittedUser in channels.choosenPermittedUser">{{permittedUser}}
+          </ion-item>
+
+          <div ng-if="obj.visibility=='private'" class="row header">
+          <label class="item item-input">
+
+            <input type="text" ng-model="object.username"placeholder="Username eingeben">
+          </label>
+
+        <button type="button" class="button" ng-click="channels.addUserPermit(object)">
+          Zugriff erlauben
+        </button>
       </div>
+      </fom>
       <!-- Channel ende -->
 
       <button class="button button-full btn btn-info" type="submit">
-         Channel erstellen
+        Channel erstellen
       </button>
-</form>
+    </form>
 
   </ion-content>
 </ion-view>

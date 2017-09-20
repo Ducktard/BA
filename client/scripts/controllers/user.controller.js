@@ -8,7 +8,7 @@ export default class UserCntrl extends Controller {
 
   constructor(){
       super(...arguments);
-
+      
       ionicPopup = this.$ionicPopup;
       state = this.$state;
 

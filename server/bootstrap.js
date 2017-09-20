@@ -89,7 +89,7 @@ if(Channel.find({"name": "news"}).count() == 0 ){
     name: "news",
     description: "Hier bekommst du die neuesten Infos",
     visibility: "private",
-    access: "all"
+    access: ["all"]
   }
   Channel.insert(object);
 
@@ -106,24 +106,36 @@ if(Messages.find({"message": "Willkommen zu Ellipsa! Hier werden Sie in zukunft 
     username : "admin",
     date : new Date(),
     readBy : [this.adminUserId],
-    visibility: "public",
     access:["all"]
   }
   Messages.insert(welcomeMsg);
 }
 
-const permissionMsg = {
-  username :"admin",
-  message: "test permission",
-  chanId : this.newsChanId,
-  userId : this.adminUserId,
-  username : "admin",
-  date : new Date(),
-  readBy : [this.adminUserId],
-  visibility: "private",
-  access: ["winner"]
+if(Channel.find({"name": "winner forum"}).count() == 0 ){
+  var object = {
+    name: "winner forum",
+    description: "Hier bekommst du die neuesten Infos",
+    visibility: "private",
+    access: ["winner"]
+  }
+  Channel.insert(object);
+
 }
-Messages.insert(permissionMsg);
+this.newsChanId = Channel.findOne({"name": "news"})._id;
+
+// if(Messages.find({""}).count() == 0 ){
+// const permissionMsg = {
+//   username :"admin",
+//   message: "test permission",
+//   chanId : this.newsChanId,
+//   userId : this.adminUserId,
+//   username : "admin",
+//   date : new Date(),
+//   readBy : [this.adminUserId],
+//   visibility: "private",
+//   access: ["winner"]
+// }
+// Messages.insert(permissionMsg);
 /*if(Checkin.find().count() !== 0) return;
   const checkins = [
     {
