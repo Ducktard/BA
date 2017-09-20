@@ -19,7 +19,6 @@ export default class TabCntrl extends Controller {
 
       numOfNewMsg(){
         if(Messages.find().count()>0){
-          console.log("user id in tabs: " + Session.get('newMsg'));
           return Session.get('newMsg');
         }else{
           return 0;

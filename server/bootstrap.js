@@ -87,7 +87,9 @@ this.adminUserId = Meteor.users.findOne({"username": "admin"})._id;
 if(Channel.find({"name": "news"}).count() == 0 ){
   var object = {
     name: "news",
-    description: "Hier bekommst du die neuesten Infos"
+    description: "Hier bekommst du die neuesten Infos",
+    visibility: "private",
+    access: "all"
   }
   Channel.insert(object);
 
@@ -95,7 +97,7 @@ if(Channel.find({"name": "news"}).count() == 0 ){
 this.newsChanId = Channel.findOne({"name": "news"})._id;
 
 
-if(Messages.find({"name": "news"}).count() == 0 ){
+if(Messages.find({"message": "Willkommen zu Ellipsa! Hier werden Sie in zukunft über alle interessanten Dinge Rund um die App informiert"}).count() == 0 ){
   const welcomeMsg = {
     username :"admin",
     message: "Willkommen zu Ellipsa! Hier werden Sie in zukunft über alle interessanten Dinge Rund um die App informiert",
@@ -103,11 +105,25 @@ if(Messages.find({"name": "news"}).count() == 0 ){
     userId : this.adminUserId,
     username : "admin",
     date : new Date(),
-    readBy : [this.adminUserId]
+    readBy : [this.adminUserId],
+    visibility: "public",
+    access:["all"]
   }
   Messages.insert(welcomeMsg);
 }
 
+const permissionMsg = {
+  username :"admin",
+  message: "test permission",
+  chanId : this.newsChanId,
+  userId : this.adminUserId,
+  username : "admin",
+  date : new Date(),
+  readBy : [this.adminUserId],
+  visibility: "private",
+  access: ["winner"]
+}
+Messages.insert(permissionMsg);
 /*if(Checkin.find().count() !== 0) return;
   const checkins = [
     {

@@ -80,7 +80,6 @@ export default class OvereatingCntrl extends Controller{
         }else{ //put food in list
             this.foods.push(food.name);
         }
-      //  console.log("foods", this.foods);
       }
 
 

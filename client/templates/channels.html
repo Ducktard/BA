@@ -18,8 +18,11 @@
                       class="item-chat item-remove-animate item-avatar item-icon-right item-assertive-custom"
                       type="item-text-wrap"
                       href="#!/channel/{{ chan._id }}">
+                      <div class="channels.setChannel(chan._id)"></div>
                           <h2><i class="ion-pound"></i>{{ chan.name }}</h2>
                           <i class="icon ion-chevron-right icon-accessory"></i>
+
+                          <div  ng-class="channels.unreadMsgInChannel(chan._id) ? 'dot-blue-middle' : 'no-msg'"></div>
                       <ion-option-button class="button-assertive" ng-click="channels.removeChannel(chan)">
                           Delete
                       </ion-option-button>

@@ -17,11 +17,9 @@ export default class AuthenticationCntrl extends Controller {
     state = this.$state;
 
     this.subscribe("leaderboardEntries");
-    // Session.set('userExists',"default");
+
     this.helpers({
-    //   existingUser(){
-    //     return LeaderboardEntries.find({"username":Session.get('username')});
-    //   }
+
     });
   }
 
@@ -40,9 +38,8 @@ export default class AuthenticationCntrl extends Controller {
 
     Session.set('userExists',LeaderboardEntries.findOne({"username":User.username}));
 
-    console.log(Session.get('userExists') + " ok funzt das? " + User.username);
 
-      if(this.checkIfUserValid(User)){
+    if(this.checkIfUserValid(User)){
       this.callMethod('newUser',User);
       //go to route
       this.$state.go('login');
@@ -55,7 +52,6 @@ export default class AuthenticationCntrl extends Controller {
   * @param User
   */
   checkIfUserValid(User){
-    //console.log("New User", User);
     let regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     let reUsername =  /^[A-Za-z0-9 _]+$/; // or /^\w+$/ as mentioned
 
@@ -103,15 +99,13 @@ export default class AuthenticationCntrl extends Controller {
     }
     //everything is valid
 
-    // console.log("in checkIfUserValid , userExists: " + u.username);
-      if(Session.get('userExists')){
-        console.log("Username ist bereits vergeben! Bitte wählen Sie einen anderen Username.");
-        this.createAlert("Username ist bereits vergeben! Bitte wählen Sie einen anderen Username.", "Registrierung fehlgeschlagen");
-        return false;
-      }else{
-        this.createAlert("Sie können sich nun mit den eingegeben Daten anmelden.", "Registrierung erfolgreich");
-        return true;
-      }
+    if(Session.get('userExists')){
+      this.createAlert("Username ist bereits vergeben! Bitte wählen Sie einen anderen Username.", "Registrierung fehlgeschlagen");
+      return false;
+    }else{
+      this.createAlert("Sie können sich nun mit den eingegeben Daten anmelden.", "Registrierung erfolgreich");
+      return true;
+    }
 
 
   }
@@ -122,7 +116,6 @@ export default class AuthenticationCntrl extends Controller {
     Meteor.loginWithPassword(credentials.username, credentials.password, function(err) {
       if (err) {
         //show popup if login failed
-        //console.log("login failed");
         this.ionicPopup.alert({
           title: err.reason || 'Login fehlgeschlagen',
           template: 'Bitte nochmal versuchen. ',
