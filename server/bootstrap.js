@@ -97,10 +97,10 @@ if(Channel.find({"name": "news"}).count() == 0 ){
 this.newsChanId = Channel.findOne({"name": "news"})._id;
 
 
-if(Messages.find({"message": "Willkommen zu Ellipsa! Hier werden Sie in zukunft über alle interessanten Dinge Rund um die App informiert"}).count() == 0 ){
+if(Messages.find({"message": "Willkommen zu Ellipsa! Hier werden Sie in Zukunft über alle interessanten Dinge rund um die App informiert"}).count() == 0 ){
   const welcomeMsg = {
     username :"admin",
-    message: "Willkommen zu Ellipsa! Hier werden Sie in zukunft über alle interessanten Dinge Rund um die App informiert",
+    message: "Willkommen zu Ellipsa! Hier werden Sie in Zukunft über alle interessanten Dinge rund um die App informiert",
     chanId : this.newsChanId,
     userId : this.adminUserId,
     username : "admin",

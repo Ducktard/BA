@@ -4,6 +4,7 @@ import {Checkins} from '../../../lib/collections';
 import {Overeatings} from '../../../lib/collections';
 import {Goals} from '../../../lib/collections';
 import { Tracker } from 'meteor/tracker';
+import { Session } from 'meteor/session';
 
 /**
 * @author Mario Curkovic
@@ -16,7 +17,7 @@ export default class CheckinCntrl extends Controller {
 
   constructor(){
     super(...arguments);
-Session.set('newMsg',Messages.find({"readBy": {$ne: Meteor.userId()},"access":{$in: [Meteor.user().username,"all"]}}).count());
+
     ionicActionSheet = this.$ionicActionSheet;
     ionicPopup = this.$ionicPopup;
     state = this.$state;
@@ -39,11 +40,16 @@ Session.set('newMsg',Messages.find({"readBy": {$ne: Meteor.userId()},"access":{$
 
 
     numOfCheckinsInCurrentLevel = this.numOfCheckinsInCurrentLevel;
+    now = new Date();
+    if(Session.get('lastCheckin') instanceof Date){
+      this.checkinLabel = Session.get('lastCheckin').getTime() > now.getTime() ? "bereits eingecheckt":"Checkin";
+    }else{
+      this.checkinLabel = "Checkin";
+    }
 
     this.subscribe('goals', function(){
       this.currentGoal =  Goals.findOne({"level":currentLevel});
     });
-
 
     this.helpers({
       data() {return Checkins.find();},
@@ -51,10 +57,27 @@ Session.set('newMsg',Messages.find({"readBy": {$ne: Meteor.userId()},"access":{$
       getNumOfCheckinsInCurrentLevel(){return Checkins.find({"type":"Checkin","date": {$gt: levelReachedDate}}).count();},
       getNumOfOvereatingsInCurrentLevel(){return Checkins.find({"type":"Overeating","date": {$gt: levelReachedDate}}).count();},
       currentGoal(){return Goals.findOne({"level":currentLevel});},
-      maxLevel(){return Goals.find().count();}
+      maxLevel(){return Goals.find().count();},
     });
   }
 
+  goToStats(){
+    state.go('tab.statistik');
+  }
+
+  startCounter(lastcheckin){
+    setInterval(tick(lastcheckin), 1000);
+  }
+
+  tick(lastcheckin){
+    now = new Date();
+    nowSec = now.getTime()/1000;
+    oneHourBefore = new Date((nowSec - 60*60)*1000);
+    lastcheckinSec = lastcheckin.getTime()/1000;
+    // if()
+    this.checkinLabel = "clicked";
+
+  }
 
   goToHistory(){
     state.go('tab.history');
@@ -105,20 +128,22 @@ Session.set('newMsg',Messages.find({"readBy": {$ne: Meteor.userId()},"access":{$
       object.date = new Date();
       object.userId = Meteor.userId();
       object.type = "Checkin";
+
+      Session.set('lastCheckin',object.date);
+      //Actions that are performed if checkin or overeating is valid
       this.callMethod('createCheckinOrOvereating', object);
       this.callMethod('addPoints',Meteor.userId(),5);
-      if((NumOfCheckinsInCurrentLevel+1) >= currentGoal.checkins){
+      if((NumOfCheckinsInCurrentLevel) >= currentGoal.checkins){
         if(NumOfOvereatingsInCurrentLevel <= currentGoal.overeatings){ // checking if user has enough checkins to enter next level
-          this.callMethod('moveToNextLevel',Meteor.userId(),maxLevel, function(){
+          this.callMethod('moveToNextLevel',Meteor.userId(),maxLevel, function(){ // enter next level if there is one
             this.createAlert("Mit diesem Checkin haben Sie das nächste Level erreicht!" +
             " Willkommen in Level " + (currentGoal.level +1) ,"Checkin erfolgreich");
             this.callMethod('addPoints',Meteor.userId(),15);
 
-          }); // enter next level if there is one
+          });
         }
       }
       this.createAlert("Checkin wurde erfolgreich gespeichert. ","Checkin erfolgreich");
-
       setTimeout(state.go('tab.createCheckin'), 1000);
     }
   }

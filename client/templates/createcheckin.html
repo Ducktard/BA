@@ -12,7 +12,8 @@
   </div>
   <div class="space"></div>
   <div class="col-md-4 text-center">
-    <button type="button" class="btn btn-circle-pos" ng-click="checkin.goToCheckin()"><span id="text-button">Neuer Checkin</span></button>
+    <button type="button" class="btn btn-circle-pos"  ng-click="checkin.goToCheckin()"><span id="text-button">{{checkin.checkinLabel}}</span></button>
+    <!--diasbled="checkin.checkinLabel == 'Checkin' ? true : false"-->
   </div>
 </div>
 

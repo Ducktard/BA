@@ -4,7 +4,7 @@ import {Meteor} from 'meteor/meteor';
 import {Checkins} from '../../../lib/collections';
 import {Foods} from '../../../lib/collections';
 import {Locations} from '../../../lib/collections';
-
+import {Goals} from '../../../lib/collections';
 
 export default class OvereatingCntrl extends Controller{
 
@@ -14,13 +14,21 @@ export default class OvereatingCntrl extends Controller{
       ionicActionSheet = this.$ionicActionSheet;
       ionicPopup = this.$ionicPopup;
       state = this.$state;
-      Session.set('newMsg',Messages.find({"readBy": {$ne: Meteor.userId()},"access":{$in: [Meteor.user().username,"all"]}}).count());
+
       this.subscribe('foods');
       this.subscribe('locations');
+      this.subscribe('checkins', function(){
+        this.numOfOvereatingsInCurrentLevel = Checkins.find({"type":"Overeating","date": {$gt: levelReachedDate}}).count();
+      });
+
+      this.currentLevel = Meteor.user().profile.level;
+      this.subscribe('goals', function(){
+        this.currentGoal = Goals.findOne({"level":currentLevel});
+      });
 
       this.helpers({
           dataFood() {  return Foods.find(); },
-          dataLocations(){return Locations.find();}
+          dataLocations(){return Locations.find();},
       });
 
       this.foods = [];
@@ -44,6 +52,12 @@ export default class OvereatingCntrl extends Controller{
             object.userId = Meteor.userId();
             object.type = "Overeating";
             object.foods = this.foods;
+            if(this.currentGoal.overeatings <= this.numOfOvereatingsInCurrentLevel){
+              this.createAlert("Das Level ist leider nicht erreicht worden, Sie dürfen das Level aber nochmal widerholen");
+              this.callMethod('repeatLevel',Meteor.userId());
+              this.foods = [];
+              return;
+            }
             this.callMethod('createCheckinOrOvereating', object);
             this.callMethod('addPoints',Meteor.userId(),-10);
             this.createAlert("Essattacke wurde erfolgreich gespeichert. ", "Erfassung erfolgreich");

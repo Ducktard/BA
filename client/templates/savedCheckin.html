@@ -32,13 +32,13 @@
                 </div>
               </div>
 
-              <div class="card list">
+              <div class="card list" ng-if="checkin.savedCheckinData.type == 'Checkin'">
                   <div class="item item-divider">
-                      Soviele Stunden Schlaf hattest du
+                        Deine Schlafstunden
                   </div>
 
                   <div class="item item-text-wrap">
-                      {{checkin.savedCheckinData.sleep}}
+                    {{checkin.savedCheckinData.restedness}}
                   </div>
                 </div>
 

@@ -1,0 +1,33 @@
+<ion-view  cache-view="false" title="Statistik" hide-back-button=true>
+  <ion-nav-title>Statistik</ion-nav-title>
+
+
+    <ion-nav-buttons side="left">
+        <button ng-click="stats.goToHistory()" class="button button-clear button-positive"><i class = "icon ion-chevron-left"></i></button>
+    </ion-nav-buttons>
+
+
+  <ion-nav-buttons side="right">
+  </ion-nav-buttons>
+
+  <ion-content ng-init="stats.aggregateData(stats.checkins)">
+    <div class="card list">
+      <div class="item item-divider" >
+        Deine bisherigen Checkins und Overeatings
+      </div>
+      <div ng-morris-line-chart
+      chart-options="{
+        xkey: 'date',
+        ykeys: ['overeatings', 'checkins'],
+        labels: ['Overeatings', 'Checkins'],
+        lineColors: ['#FF0000','#00b200']
+      }"
+      chart-data= "stats.finalData"
+      name="goalChart">
+    </div>
+  </div>
+
+
+</ion-content>
+
+</ion-view>

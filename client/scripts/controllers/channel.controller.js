@@ -74,7 +74,6 @@ export default class ChannelCntrl extends Controller {
 
   permitToShowMessage(message){
     if(Messages.find({"_id": message._id,"access":{$in: [Meteor.user().username,"all"]}}).count() != 0){
-      console.log("permission to show message");
       return true;
     }else{
       return false;

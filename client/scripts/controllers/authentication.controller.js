@@ -123,6 +123,7 @@ export default class AuthenticationCntrl extends Controller {
         });
       }else{
         //login succesfull
+        Session.set('currentUsername',credentials.username);
         this.state.go('tab.profile');
       }
 

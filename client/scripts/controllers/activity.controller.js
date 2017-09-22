@@ -18,7 +18,7 @@ export default class ActivityCntrl extends Controller{
     ionicPopup = this.$ionicPopup;
 
     this.subscribe('activities');
-Session.set('newMsg',Messages.find({"readBy": {$ne: Meteor.userId()},"access":{$in: [Meteor.user().username,"all"]}}).count());
+
     this.helpers({
         data() {
             return Activities.find();

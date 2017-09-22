@@ -13,7 +13,7 @@ export default class LocationCntrl extends Controller {
 
     constructor(){
         super(...arguments);
-Session.set('newMsg',Messages.find({"readBy": {$ne: Meteor.userId()},"access":{$in: [Meteor.user().username,"all"]}}).count());
+
         state = this.$state;
 
         this.subscribe('locations');

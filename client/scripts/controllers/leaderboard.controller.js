@@ -15,7 +15,7 @@ export default class LeaderboardCntrl extends Controller {
 
     ionicPopup = this.$ionicPopup;
     state = this.$state;
-Session.set('newMsg',Messages.find({"readBy": {$ne: Meteor.userId()},"access":{$in: [Meteor.user().username,"all"]}}).count());
+
     this.subscribe("leaderboardEntries");
 
 

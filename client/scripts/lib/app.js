@@ -25,6 +25,9 @@ import { Accounts } from 'meteor/accounts-base';
 //date filter
 import CalendarFilter from '../filters/calendar.filter';
 
+//Checkins
+import {Checkins} from '../../../lib/collections';
+
 
 // Modules
 import RoutesConfig from '../routes';
@@ -62,6 +65,9 @@ import ActivityCntrl from '../controllers/activity.controller.js';
 //leaderboard
 import LeaderboardCntrl from '../controllers/leaderboard.controller.js';
 
+//leaderboard
+import StatsCntrl from '../controllers/stats.controller.js';
+
 const App = 'Ellipsa';
 
 // App
@@ -76,8 +82,8 @@ Angular.module(App, [
 
 new Loader(App)
   .load(CalendarFilter)
-  .load(TabCntrl)
   .load(AuthenticationCntrl)
+  .load(TabCntrl)
   .load(CheckinCntrl)
   .load(OvereatingCntrl)
   .load(UserCntrl)
@@ -87,6 +93,7 @@ new Loader(App)
   .load(LocationCntrl)
   .load(ActivityCntrl)
   .load(LeaderboardCntrl)
+  .load(StatsCntrl)
   .load(RoutesConfig);
 
 // Startup
@@ -99,4 +106,5 @@ else {
 
 function onReady() {
   Angular.bootstrap(document, [App]);
+
 }
