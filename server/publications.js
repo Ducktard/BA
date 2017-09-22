@@ -26,7 +26,7 @@ Meteor.publish('users', function() {
 Meteor.publishComposite('leaderboardEntries', function(){
     return{
       find() {
-        return LeaderboardEntries.find({}, { sort: {level: 1,points: -1 } });
+        return LeaderboardEntries.find({}, { sort: {level: -1,points: 1 } });
       }
     }
 });

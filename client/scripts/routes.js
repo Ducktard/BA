@@ -53,6 +53,8 @@ import addLocationsTemplateUrl from '../templates/addLocation.html';
 import seeActivitiesTemplateUrl from '../templates/activities.html';
 import addActivitiesTemplateUrl from '../templates/addActivity.html';
 
+
+
 //leaderboard
 import leaderboardTemplateUrl from '../templates/leaderboard.html';
 
@@ -170,7 +172,7 @@ console.log("You don't have access here");
   views: {
     'tab-goals':{
       templateUrl: goalsTemplateUrl,
-      controller: 'CheckinCntrl as checkin'
+      controller: 'GoalsCntrl as goal'
     }
   }
 })
@@ -192,7 +194,7 @@ console.log("You don't have access here");
   views: {
     'tab-history': {
       templateUrl: historyTemplateUrl,
-      controller:  'CheckinCntrl as checkin'
+      controller:  'HistoryCntrl as history'
     }
   }
 })
@@ -213,7 +215,7 @@ console.log("You don't have access here");
   templateUrl: savedCheckinTemplateUrl,
   //important otherwise the channelId in the $stateParams sometimes dont get updated
   cache: false,
-  controller:   'CheckinCntrl as checkin'
+  controller:   'HistoryCntrl as history'
 })
 
 .state('tab.channels',{

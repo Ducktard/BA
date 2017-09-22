@@ -1,11 +1,11 @@
 <ion-view cache-view="false" title="{{checkin.savedCheckinData.type}} am {{checkin.dateToStringWithTime(checkin.savedCheckinData.date)}}" hide-back-button=true>
 
   <ion-nav-buttons side="left">
-      <button ng-click="checkin.goToHistory()" class="button button-clear button-positive"><i class = "icon ion-chevron-left"></i></button>
+      <button ng-click="history.goToHistory()" class="button button-clear button-positive"><i class = "icon ion-chevron-left"></i></button>
   </ion-nav-buttons>
 
   <ion-nav-buttons side="right">
-      <button id="info-button" ng-click="checkin.savedCheckinInfo()" class="button button-clear button-positive"><i class="icon ion-information"></i></button>
+      <button id="info-button" ng-click="history.savedCheckinInfo()" class="button button-clear button-positive"><i class="icon ion-information"></i></button>
   </ion-nav-buttons>
 
 
@@ -18,7 +18,7 @@
               </div>
 
               <div class="item item-text-wrap">
-                  {{checkin.savedCheckinData.stress}}
+                  {{history.savedCheckinData.stress}}
               </div>
             </div>
 
@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="item item-text-wrap">
-                    {{checkin.savedCheckinData.hunger}}
+                    {{history.savedCheckinData.hunger}}
                 </div>
               </div>
 
@@ -38,17 +38,17 @@
                   </div>
 
                   <div class="item item-text-wrap">
-                    {{checkin.savedCheckinData.restedness}}
+                    {{history.savedCheckinData.restedness}}
                   </div>
                 </div>
 
             <div class="card list">
               <div class="item item-divider">
-                  {{checkin.savedCheckinData.type == 'Checkin' && ' Dein Gewicht' || 'Daran hast du dich überfressen'}}
+                  {{history.savedCheckinData.type == 'Checkin' && ' Dein Gewicht' || 'Daran hast du dich überfressen'}}
               </div>
 
               <div class="item item-text-wrap">
-                  {{checkin.savedCheckinData.type == 'Checkin' && checkin.savedCheckinData.weight || checkin.savedCheckinData.foods }}
+                  {{history.savedCheckinData.type == 'Checkin' && history.savedCheckinData.weight || history.savedCheckinData.foods }}
               </div>
             </div>
 

@@ -43,6 +43,9 @@ import TabCntrl from '../controllers/tab.controller.js';
 //checkin CheckinCntrl
 import CheckinCntrl from '../controllers/checkin.controller.js';
 
+//history and savedCheckinData (Detailview)
+import HistoryCntrl from '../controllers/history.controller.js';
+
 //overeating controller
 import OvereatingCntrl from '../controllers/overeating.controller.js';
 
@@ -61,6 +64,9 @@ import LocationCntrl from '../controllers/location.controller.js';
 
 //activities
 import ActivityCntrl from '../controllers/activity.controller.js';
+
+//goals
+import GoalsCntrl from '../controllers/goals.controller.js';
 
 //leaderboard
 import LeaderboardCntrl from '../controllers/leaderboard.controller.js';
@@ -85,6 +91,7 @@ new Loader(App)
   .load(AuthenticationCntrl)
   .load(TabCntrl)
   .load(CheckinCntrl)
+  .load(HistoryCntrl)
   .load(OvereatingCntrl)
   .load(UserCntrl)
   .load(ChannelCntrl)
@@ -92,6 +99,7 @@ new Loader(App)
   .load(FoodCntrl)
   .load(LocationCntrl)
   .load(ActivityCntrl)
+  .load(GoalsCntrl)
   .load(LeaderboardCntrl)
   .load(StatsCntrl)
   .load(RoutesConfig);

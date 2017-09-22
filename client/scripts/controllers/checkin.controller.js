@@ -34,12 +34,9 @@ export default class CheckinCntrl extends Controller {
     currentLevel = this.currentLevel;
 
 
-    this.subscribe('checkins', function(){
-      this.numOfCheckinsInCurrentLevel = Checkins.find({"type":"Checkin","date": {$gt: levelReachedDate}}).count();
-    });
+    this.subscribe('checkins');
 
 
-    numOfCheckinsInCurrentLevel = this.numOfCheckinsInCurrentLevel;
     now = new Date();
     if(Session.get('lastCheckin') instanceof Date){
       this.checkinLabel = Session.get('lastCheckin').getTime() > now.getTime() ? "bereits eingecheckt":"Checkin";
@@ -53,16 +50,11 @@ export default class CheckinCntrl extends Controller {
 
     this.helpers({
       data() {return Checkins.find();},
-      savedCheckinData() {return Checkins.findOne({_id: checkInId});},
       getNumOfCheckinsInCurrentLevel(){return Checkins.find({"type":"Checkin","date": {$gt: levelReachedDate}}).count();},
       getNumOfOvereatingsInCurrentLevel(){return Checkins.find({"type":"Overeating","date": {$gt: levelReachedDate}}).count();},
       currentGoal(){return Goals.findOne({"level":currentLevel});},
       maxLevel(){return Goals.find().count();},
     });
-  }
-
-  goToStats(){
-    state.go('tab.statistik');
   }
 
   startCounter(lastcheckin){
@@ -79,9 +71,6 @@ export default class CheckinCntrl extends Controller {
 
   }
 
-  goToHistory(){
-    state.go('tab.history');
-  }
 
 
   goToCheckin(){
@@ -104,22 +93,14 @@ export default class CheckinCntrl extends Controller {
 
   dateToString(date){
     if(date instanceof Date){
-      return (date.getDate()) + "." + (date.getUTCMonth()+1) + "." + date.getFullYear() ;
+      return date.toLocaleString();
     }else{
       s = new Date(date);
-      return (s.getDate()) + "." + (s.getUTCMonth()+1) + "." + s.getFullYear() ;
+      return s.toLocaleString();
     }
   }
 
-  checkIfLevelIsReached(){
-    if(this.getNumOfCheckinsInCurrentLevel >= this.currentGoal.checkins){
-      if(this.getNumOfOvereatingsInCurrentLevel <= this.currentGoal.overeatings){
-        return true;
-      }
-    }else{
-      return false;
-    }
-  }
+
 
 
   createCheckin(object,NumOfCheckinsInCurrentLevel,NumOfOvereatingsInCurrentLevel,currentGoal,maxLevel){
@@ -169,16 +150,6 @@ export default class CheckinCntrl extends Controller {
       "bei deinem Ziel zu unterstützen","Info");
     }
 
-
-    //history info
-    infoHistory(){
-      this.createAlert("Hier werden alle deine Checkins und Essattacken in einer Historie angezeigt","Info");
-    }
-
-    //Checkin/Overeating info
-    savedCheckinInfo(){
-      this.createAlert("Hier kannst du deine eingegebenen Daten ansehen {{checkInId}}","Info");
-    }
 
     /**
     * Method for creating an alert.

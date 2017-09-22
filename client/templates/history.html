@@ -1,11 +1,11 @@
 <ion-view cache-view="false" title="Verlauf" hide-back-button=false>
 
   <ion-nav-buttons side="left">
-      <button id="info-button" ng-click="checkin.infoHistory()" class="button button-clear button-positive"><i class="icon ion-information"></i></button>
+      <button id="info-button" ng-click="history.infoHistory()" class="button button-clear button-positive"><i class="icon ion-information"></i></button>
   </ion-nav-buttons>
 
   <ion-nav-buttons side="right">
-      <button  ng-click="checkin.goToStats()" class="button button-clear button-positive"><i class="ion-stats-bars"></i>  &nbsp; Statistik als Graph</button>
+      <button  ng-click="history.goToStats()" class="button button-clear button-positive"><i class="ion-stats-bars"></i>  &nbsp; Statistik als Graph</button>
   </ion-nav-buttons>
 
   <ion-content>
@@ -13,7 +13,7 @@
           <span class="ueberschrift-h1-grey" ng-show="!checkin.data.length">Bisher noch keine Checkins oder Essattacken.</span>
 
           <ion-item
-          ng-repeat="e in checkin.data"
+          ng-repeat="e in history.data"
           class="item-chat item-remove-animate item-avatar item-icon-right"
           type="item-text-wrap"
           href="#!/history/{{ e._id }}"

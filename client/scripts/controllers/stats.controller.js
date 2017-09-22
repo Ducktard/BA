@@ -4,7 +4,11 @@ import {Checkins} from '../../../lib/collections';
 
 
 /**
-* Controller for managing the profile.
+* @author Johannes Weyers
+*
+* Controller for handling checkins.
+* A checkin is a set of physical parameters that a user can/should
+* enter several times a day.
 */
 export default class StatsCntrl extends Controller {
 
@@ -46,9 +50,8 @@ export default class StatsCntrl extends Controller {
       c = checkins[i];
       c.checkins = 1;
       c.overeatings = 1;
-      console.log("c date: " + c.date);
-      console.log("c date time: " + c.date.getTime());
-      if(lastDate.getTime() > c.date.getTime()+1000*60*60*24){
+
+      if(lastDate.getTime() > c.date.getTime()+1000*60*60){
         lastDate = c.date;
         n = Object.assign({}, c);
         n.date = c.date.getTime();

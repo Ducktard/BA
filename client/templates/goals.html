@@ -4,7 +4,7 @@
 
   <ion-nav-buttons side="left">
     <div side="left">
-      <h6>Level: {{checkin.currentLevel}}</h6>
+      <h6>Level: {{goal.currentLevel}}</h6>
 
     </div>
 
@@ -18,25 +18,25 @@
 
     <div class="card list">
       <div class="item item-divider" >
-        Noch {{checkin.currentGoal.checkins - checkin.numOfCheckinsInCurrentLevel}} Checkins bis Level {{checkin.currentLevel + 1}}
+        Noch {{goal.currentGoal.checkins - goal.numOfCheckinsInCurrentLevel}} Checkins bis Level {{goal.currentLevel + 1}}
       </div>
       <div ng-morris-donut-chart
       chart-options="{colors:['#eaeaea','#00b200']}"
-      chart-data="[{label: 'Checkins bis zum Ziel', value: checkin.currentGoal.checkins - checkin.numOfCheckinsInCurrentLevel},
-                  {label: 'erledigte Checkins', value: checkin.getNumOfCheckinsInCurrentLevel}]"
+      chart-data="[{label: 'Checkins bis zum Ziel', value: goal.currentGoal.checkins - goal.numOfCheckinsInCurrentLevel},
+                  {label: 'erledigte Checkins', value: goal.getNumOfCheckinsInCurrentLevel}]"
       name="goalChart">
     </div>
   </div>
 
   <div class="card list">
     <div class="item item-divider">
-      Bis zum {{checkin.dateToString(checkin.levelGoalDate)}} darfst du dich noch maximal {{checkin.currentGoal.overeatings - checkin.getNumOfOvereatingsInCurrentLevel}} mal überessen!
+      Bis zum {{goal.dateToString(goal.levelGoalDate)}} darfst du dich noch maximal {{goal.currentGoal.overeatings - goal.getNumOfOvereatingsInCurrentLevel}} mal überessen!
     </div>
 
     <div ng-morris-donut-chart
     chart-options="{colors:['#eaeaea','#FF0000']}"
-    chart-data="[{label: 'erlaubte Essattacken bis Levelziel', value: checkin.currentGoal.overeatings - checkin.getNumOfOvereatingsInCurrentLevel},
-                {label: 'eingetragene Essattacken', value: checkin.getNumOfOvereatingsInCurrentLevel}]"
+    chart-data="[{label: 'erlaubte Essattacken bis Levelziel', value: goal.currentGoal.overeatings - goal.getNumOfOvereatingsInCurrentLevel},
+                {label: 'eingetragene Essattacken', value: goal.getNumOfOvereatingsInCurrentLevel}]"
     name="goalChart">
   </div>
   </div>
