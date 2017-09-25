@@ -17,11 +17,14 @@ export default class OvereatingCntrl extends Controller{
 
       this.subscribe('foods');
       this.subscribe('locations');
+
+      levelReachedDate = Meteor.user().profile.reachedLevel;
       this.subscribe('checkins', function(){
         this.numOfOvereatingsInCurrentLevel = Checkins.find({"type":"Overeating","date": {$gt: levelReachedDate}}).count();
       });
 
       this.currentLevel = Meteor.user().profile.level;
+      currentLevel = this.currentLevel;
       this.subscribe('goals', function(){
         this.currentGoal = Goals.findOne({"level":currentLevel});
       });

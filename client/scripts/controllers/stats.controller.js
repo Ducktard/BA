@@ -32,7 +32,8 @@ export default class StatsCntrl extends Controller {
 }
 
 
-  aggregateData(checkins){
+  aggregateData(){
+    checkins = Checkins.find().fetch();
     data = []
     n = Object.assign({}, checkins[0]);
     n.date = checkins[0].date.getTime();
@@ -44,6 +45,7 @@ export default class StatsCntrl extends Controller {
       data[0].overeatings = 1;
       data[0].checkins = 0;
     }
+
     lastDate = new Date(checkins[0].date);
     for (i in checkins) {
       console.log(i);
