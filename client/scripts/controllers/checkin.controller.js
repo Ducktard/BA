@@ -114,18 +114,21 @@ export default class CheckinCntrl extends Controller {
       //Actions that are performed if checkin or overeating is valid
       this.callMethod('createCheckinOrOvereating', object);
       this.callMethod('addPoints',Meteor.userId(),5);
-      if((NumOfCheckinsInCurrentLevel) >= currentGoal.checkins){
+      if((NumOfCheckinsInCurrentLevel)+1 >= currentGoal.checkins){
         if(NumOfOvereatingsInCurrentLevel <= currentGoal.overeatings){ // checking if user has enough checkins to enter next level
+          //methods that are called if next Level is reached
           this.callMethod('moveToNextLevel',Meteor.userId(),maxLevel, function(){ // enter next level if there is one
             this.createAlert("Mit diesem Checkin haben Sie das nächste Level erreicht!" +
             " Willkommen in Level " + (currentGoal.level +1) ,"Checkin erfolgreich");
+            //Achievements conditions and extensions can be placed here
+            this.callMethod('sendMessageToPlayer',Meteor.user().username,currentGoal.achievementAchiever);
             this.callMethod('addPoints',Meteor.userId(),15);
 
           });
         }
       }
       this.createAlert("Checkin wurde erfolgreich gespeichert. ","Checkin erfolgreich");
-      setTimeout(state.go('tab.createCheckin'), 1000);
+      // setTimeout(state.go('tab.createCheckin'), 1000);
     }
   }
 

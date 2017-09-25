@@ -24,37 +24,44 @@ Meteor.startup(() => {
       {
         level : 1,
         checkins: 3,
-        overeatings: 5
+        overeatings: 5,
+        achievementAchiever:"Test eines Achievements für Level 1"
       },
       {
         level : 2,
         checkins: 5,
-        overeatings: 4
+        overeatings: 4,
+        achievementAchiever:"Test eines Achievements für Level 2"
       },
       {
         level : 3,
         checkins: 7,
-        overeatings: 3
+        overeatings: 3,
+        achievementAchiever:"Test eines Achievements für Level 3"
       },
       {
         level : 4,
         checkins: 9,
-        overeatings: 2
+        overeatings: 2,
+        achievementAchiever:"Test eines Achievements für Level 4"
       },
       {
         level : 5,
         checkins: 11,
-        overeatings: 2
+        overeatings: 2,
+        achievementAchiever:"Test eines Achievements für Level 5"
       },
       {
         level : 6,
         checkins: 12,
-        overeatings: 1
+        overeatings: 1,
+        achievementAchiever:"Test eines Achievements für Level 6"
       },
       {
         level : 7,
         checkins: 14,
-        overeatings: 0
+        overeatings: 0,
+        achievementAchiever:"Test eines Achievements für Level 7"
       }
 
     ];

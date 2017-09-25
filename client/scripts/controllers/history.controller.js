@@ -29,8 +29,7 @@ export default class HistoryCntrl extends Controller {
     userId = Meteor.userId();
     username = Meteor.user().username;
 
-    setTimeout('', 1000);
-    setInterval(function(){Session.set('newMsg',Messages.find({"readBy": {$ne: userId},"access":{$in: [username,"all"]}}).count());}, 2000);
+
   }
 
   // info: details about saved checkins and overeatings

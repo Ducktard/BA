@@ -29,7 +29,8 @@ export default class LeaderboardCntrl extends Controller {
 
   info(){
     this.createAlert("Hier kannst du sehen wie gut du im Vergleich zu anderen Nutzern bist "+
-    " ","Info");
+    " Du erhälst: - für jeden Checkin (5) Punkte  - für jedes geschaffte Level (15) Punkte \n"+
+    " - für jedes Overeating  (-10) Punkte ","Info");
   }
 
   /**

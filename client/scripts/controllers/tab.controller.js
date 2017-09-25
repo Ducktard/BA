@@ -27,13 +27,23 @@ export default class TabCntrl extends Controller {
           return 0;
         }
       },
+      numOfNewMessages(){
+        if(Meteor.user()){
+        Messages.find({"readBy": {$ne: Meteor.userId()},"access":{$in: [Meteor.user().username,"all"]}}).count();
+      }else{
+        return 0;
+      }
+      },
     });
 
-    userId = Meteor.userId();
-    username = Meteor.user().username;
 
-    setTimeout('', 1000);
-    setInterval(function(){Session.set('newMsg',Messages.find({"readBy": {$ne: userId},"access":{$in: [username,"all"]}}).count());}, 2000);
+    if(Meteor.user()){
+      userId = Meteor.userId();
+      username = Meteor.user().username;
+    }
+
+
+    setInterval(function(){Session.set('newMsg',Messages.find({"readBy": {$ne: userId},"access":{$in: [username,"all"]}}).count());}, 1000);
   }
 
 //   setCurrentUser(){
