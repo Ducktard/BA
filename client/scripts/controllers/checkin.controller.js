@@ -128,7 +128,7 @@ export default class CheckinCntrl extends Controller {
         }
       }
       this.createAlert("Checkin wurde erfolgreich gespeichert. ","Checkin erfolgreich");
-      // setTimeout(state.go('tab.createCheckin'), 1000);
+      setTimeout(state.go('tab.createCheckin'), 1000);
     }
   }
 

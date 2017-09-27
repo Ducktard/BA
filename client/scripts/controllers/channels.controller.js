@@ -3,7 +3,6 @@ import { Meteor } from 'meteor/meteor';
 import {Channel} from '../../../lib/collections';
 import {Checkins} from '../../../lib/collections';
 import {Messages} from '../../../lib/collections';
-// import { Session } from 'meteor/session';
 /**
 * @author Mario Curkovic
 *

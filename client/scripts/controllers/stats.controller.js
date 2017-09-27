@@ -6,9 +6,8 @@ import {Checkins} from '../../../lib/collections';
 /**
 * @author Johannes Weyers
 *
-* Controller for handling checkins.
-* A checkin is a set of physical parameters that a user can/should
-* enter several times a day.
+* Controller to aggregate Data in order to present it in a linegraph
+* the data which is transformes comes from checkins collection
 */
 export default class StatsCntrl extends Controller {
 
@@ -68,7 +67,6 @@ export default class StatsCntrl extends Controller {
         }
       }
     }
-    // setTimeout('', 1000);
   console.log(data);
   data.reverse();
   this.finalData = data;

@@ -6,7 +6,7 @@ import {Checkins} from '../../../lib/collections';
 /**
 * @author Johannes Weyers
 *
-* Controller for showing history and their details
+* Controller for showing history and its details
 */
 export default class HistoryCntrl extends Controller {
 
