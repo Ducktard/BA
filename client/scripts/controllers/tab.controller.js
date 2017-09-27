@@ -2,6 +2,7 @@ import { Controller } from 'angular-ecmascript/module-helpers';
 import { Meteor } from 'meteor/meteor';
 import {Messages} from '../../../lib/collections';
 import {Channel} from '../../../lib/collections';
+import {Notifications} from '../../../lib/collections';
 import { Session } from 'meteor/session';
 
 /**
@@ -17,7 +18,7 @@ export default class TabCntrl extends Controller {
     state = this.$state;
 
     this.subscribe('messages');
-
+    this.subscribe('notifications');
 
     this.helpers({
       numOfNewMsg(){
@@ -27,13 +28,6 @@ export default class TabCntrl extends Controller {
           return 0;
         }
       },
-      numOfNewMessages(){
-        if(Meteor.user()){
-        Messages.find({"readBy": {$ne: Meteor.userId()},"access":{$in: [Meteor.user().username,"all"]}}).count();
-      }else{
-        return 0;
-      }
-      },
     });
 
 
@@ -42,16 +36,52 @@ export default class TabCntrl extends Controller {
       username = Meteor.user().username;
     }
 
-
+    //Update the badge for new Messages
     setInterval(function(){Session.set('newMsg',Messages.find({"readBy": {$ne: userId},"access":{$in: [username,"all"]}}).count());}, 1000);
+    setInterval(function(){
+      if(Notifications.find().count() != 0)
+      {
+        n = Notifications.findOne();
+        ionicPopup.alert({
+          title: n.header,
+          template: n.message,
+          okType: 'button-positive button-clear'
+      });
+      Notifications.update({"_id":n._id},{$set: {"read": true}});
+    }
+    }, 1000);
+
   }
 
-//   setCurrentUser(){
-//     do {
-//       user = Meteor.user();
-// } while (Meteor.user().username == null);
-//     Session.set('newMsg',Messages.find({"readBy": {$ne: Meteor.userId()},"access":{$in: [user.username,"all"]}}).count());
-//   }
+
+createAlert(message, header){
+      ionicPopup.alert({
+        title: header,
+        template: message,
+        okType: 'button-positive button-clear'
+      });
+  }
+
+checkNotifications(){
+  setInterval(function(){
+    checkNotifications();
+    if(Notifications.find({"read": false}).count() > 0){
+      notis = Notifications.find({"read": false}).fetch();
+      for(n in notis){
+        createAlert(n.message,n.header)
+
+        // this.callMethod(n);
+      }
+    }
+  }, 1000);
+
+}
+  /**
+  * Method for creating an alert.
+  * @param message
+  * @param header
+  */
+
 
 }
 
