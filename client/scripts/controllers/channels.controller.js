@@ -35,17 +35,14 @@ Session.set('newMsg',Messages.find({"readBy": {$ne: Meteor.userId()},"access":{$
     this.helpers({
       data() {return Channel.find();},
       choosenPermittedUser(){return Session.get('permittedUser');}
-      // unreadMsgInChannel(){
-      //   if(Messages.find({"chanId":Session.get('channels.chanId'),"readBy": {$ne: Meteor.userId()}}).count() == 0){
-      //
-      //     return false;
-      //   }
-      //   return true;}
-      // });
+
     });
   }
   addUserPermit(object){
     var array = Session.get('permittedUser').slice(0);
+    if(array.includes(object.username)){
+      return;
+    }
     array.push(object.username);
     Session.set('permittedUser',array);
   }
